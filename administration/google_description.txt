@@ -1,0 +1,8 @@
+Description: UniSport provides people a web interface where they can look for the current sport offerings of the university. They can also register for specific courses and instantly see where these courses are located on a map. 
+
+Minimal (absolutely necessary): sample data to test application; server, database and frontend running showing dummy page with content retrieved from database; basic string search; basic bootstrap boilerplate design on frontend; 
+Normal (should be possible): extended search (data and time, place, etc.); basic reservation tool (only provide name)
+Optimal (possible if no problems occur): nice enhanced design; more elaborate reservation tool (with captcha, mail checking, etc.); showing place directly on map; 
+Nice to have (possible if there is additional time): get real data from university sports sites from bern, neuchatel and fribourg;
+
+
