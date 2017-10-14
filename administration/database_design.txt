@@ -1,0 +1,39 @@
+Legend:
+* optional
+
+example:
+
+// course
+{
+  course_name: Floorball,
+  start_day: Monday,
+  end_day: Monday,
+  start_time: 18:00,
+  end_time: 20:00,
+  *place: Sports hall 4,
+  *institution: ZSSW Bern,
+  *street: Bremgartenstrasse,
+  *number: 145,
+  *plz: 3012,
+  *city: Bern,
+  max_number_of_participants: 20
+}
+
+// reservation
+{
+  course_name: Floorball,
+  participants: [
+    {
+      firstname: Mouad,
+      lastname: Kondah,
+      email: mouad.kondah@students.unine.ch,
+      *date: 02/10/2017 // if not specified reserved for every date
+    },
+    {
+      firstname: Joel,
+      lastname: Niklaus,
+      email: joel.niklaus@students.unibe.ch,
+      *date: 02/10/2017 // if not specified reserved for every date
+    }
+  ]
+}
