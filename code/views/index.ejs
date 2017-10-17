@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
     <head>
+         <title><%= names %></title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf8" />
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -33,16 +34,20 @@
                 </tbody>
                      
 
-                <div ng-show="dossierCourant.label == 'home' ">
-                    <form action="/quotes" method="POST">
+                
+                    <p ng-bind-html="dossierCourant.description"><p>
+                        <div ng-show="dossierCourant.label =='course' ">
+                    <form action="/chercher" method="POST">
   <input type="text" placeholder="name" name="name">
-  <input type="text" placeholder="quote" name="quote">
-  <button type="submit">Submit</button>
+  <button type="submit" ng-click="afficher()">Chercher</button>
 </form>
-                <p ng-bind-html="dossierCourant.text "></p>
+  </div>
+        
+
+                
 
                 </div>
-                                </div>
+                              
 
 
 

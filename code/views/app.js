@@ -1,28 +1,64 @@
 angular.module("Webmail", [ "ngSanitize" ])
-.controller("WebmailCtrl",  function($scope, $location) {
+.controller("WebmailCtrl",  function($scope, $location,$http) {
 	
 	$scope.dossiers = [
-		{ value: "RECEPTION", label: 'home', text: 
-		"this is a home page"
+		{ value: "BJ", label: 'home', text: 
+		"this is a home page", description:"Bienvenue sur notre site web  "
 		 }, 
 		{ value: "ARCHIVES", label: "course", text: 
-		"thisis a list of courses"
+		"thisis a list of courses",description:" <h2>CHERCHER UN COURS</h2>  "
 		  },
 		{ value: "ENVOYES", label: "sign in", text: 
-		"list of courses"
+		"list of courses",description:"inscris toi dès maintenant"
 		 },
 		{ value: "SPAM", label: "contact", text: 
-		"contact part"
+		"contact part",description:"contact:"
 		 }
 	];
 
 	$scope.dossierCourant = null;
 
+	$scope.showCourse = false;
+	$scope.nomDuCour="heloo";
+
  
 
+
+	 
+	
+ 
+	$scope.afficher = function(formData) {
+        $scope.showCourse = true;
+        console.log(formData);
+
+        $http.post('/chercher',formData).
+        then(function(response) {
+            $scope.nomDuCour=response.data;
+            console.log("posted successfully");
+        }).catch(function(response) {
+            console.error("error in posting");
+        });
+    }
+
+
+
+   
+
+
+
+	
+
+	 
+		
+
+
+	 
 	$scope.selectionDossier = function(dossier) {
 		$scope.dossierCourant = dossier;
 	}
+
+               
+
 
 	
 
@@ -50,8 +86,3 @@ angular.module("Webmail", [ "ngSanitize" ])
 
 	
 });
-
-
-
-
-
