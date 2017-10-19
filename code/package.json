@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "author": "",
   "license": "ISC",
@@ -13,8 +14,5 @@
     "ejs": "^2.5.7",
     "express": "^4.16.2",
     "mustache-express": "^1.2.5"
-  },
-  "scripts": {
-    "start": "node server.js"
   }
 }

@@ -1,0 +1,7 @@
+Here we can write useful commands and help text:
+
+you can use "npm start" to start up server (because of script in package.json file)
+
+import database with the following command in commandline in the bin directory of your mongodb installation (edit path!):
+mongoimport --db UniSport --collection database --drop --file path/to/database/database.json
+
