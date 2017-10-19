@@ -3,5 +3,12 @@ Here we can write useful commands and help text:
 you can use "npm start" to start up server (because of script in package.json file)
 
 import database with the following command in commandline in the bin directory of your mongodb installation (edit path!):
-mongoimport --db UniSport --collection database --drop --file path/to/database/database.json
+mongoimport --db UniSport --collection courses --drop --file path/to/database/courses.json --jsonArray
+mongoimport --db UniSport --collection reservations --drop --file path/to/database/reservations.json --jsonArray
 
+
+Startup MongoDB: "mongo"
+Switch to DB: "use UniSport"
+Example Database Queries:
+db.courses.find({"course_name": "Floorball"})
+db.reservations.find({"participants.firstname":"Wladimir"})
