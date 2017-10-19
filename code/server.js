@@ -12,9 +12,10 @@ var db;
 
 MongoClient.connect(url, (err, database) => {
     if (err) return console.log(err);
-    db = database
-    app.listen(3009, () => {
-        console.log('listening on 3000')
+    db = database;
+    port = 3009;
+    app.listen(port, () => {
+        console.log('listening on port ' + port);
     })
 });
 

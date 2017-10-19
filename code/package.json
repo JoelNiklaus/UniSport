@@ -13,5 +13,8 @@
     "ejs": "^2.5.7",
     "express": "^4.16.2",
     "mustache-express": "^1.2.5"
+  },
+  "scripts": {
+    "start": "node server.js"
   }
 }
