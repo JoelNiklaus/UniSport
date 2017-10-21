@@ -1,50 +1,30 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const app = express();
-const mustache = require('mustache-express');
-const url = "mongodb://localhost:27017/courses";
+// modules =================================================
+var express        = require('express');
+var app            = express();
+var mongoose       = require('mongoose');
+var bodyParser     = require('body-parser');
+var methodOverride = require('method-override');
 
+// configuration ===========================================
+	
+// config files
+var db = require('./config/db');
 
-const MongoClient = require('mongodb').MongoClient;
-app.set('view engine', 'ejs');
+var port = process.env.PORT || 8080; // set our port
+mongoose.connect(db.url); // connect to our mongoDB database (commented out after you enter in your own credentials)
 
-var db;
+// get all data/stuff of the body (POST) parameters
+app.use(bodyParser.json()); // parse application/json 
+app.use(bodyParser.json({ type: 'application/vnd.api+json' })); // parse application/vnd.api+json as json
+app.use(bodyParser.urlencoded({ extended: true })); // parse application/x-www-form-urlencoded
 
-MongoClient.connect(url, (err, database) => {
-    if (err) return console.log(err);
-    db = database;
-    port = 3009;
-    app.listen(port, () => {
-        console.log('listening on port ' + port);
-    })
-});
+app.use(methodOverride('X-HTTP-Method-Override')); // override with the X-HTTP-Method-Override header in the request. simulate DELETE/PUT
+app.use(express.static(__dirname + '/public')); // set the static files location /public/img will be /img for users
 
+// routes ==================================================
+require('./app/routes')(app); // pass our application into our routes
 
-app.use(bodyParser.urlencoded({extended: true}));
-
-app.use(express.static(__dirname + '/views'));
-
-app.get('/', function (req, res) {
-    res.sendFile('index.html');
-});
-
-
-app.post('/chercher', (req, res) => {
-    console.log(req);
-
-
-    db.collection('chercher').save(req.body, (err, result) => {
-        if (err) return console.log(err);
-
-        db.collection("chercher").find(req.body).toArray(function (err, result) {
-            if (err) throw err;
-            res.set('Access-Control-Allow-Origin', '*');
-            console.log(result);
-
-
-            res.json(result);
-
-
-        });
-    });
-});
+// start app ===============================================
+app.listen(port);	
+console.log('Magic happens on port ' + port); 			// shoutout to the user
+exports = module.exports = app; 						// expose app
