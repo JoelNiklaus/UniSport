@@ -1,10 +1,9 @@
 [
   {
     "course_name": "Floorball",
-    "start_day": "Monday",
-    "end_day": "Monday",
-    "start_time": "2017-10-16T18:00:00.511Z",
-    "end_time": "2017-10-16T20:00:00.511Z",
+    "start_datetime": "2017-10-16T18:00:00.511Z",
+    "end_datetime": "2017-10-16T20:00:00.511Z",
+    "max_number_of_participants": 20,
     "address": {
       "place": "Sports hall 4",
       "institution": "ZSSW Bern",
@@ -12,15 +11,13 @@
       "number": 145,
       "plz": 3012,
       "city": "Bern"
-    },
-    "max_number_of_participants": 20
+    }
   },
   {
     "course_name": "Soccer",
-    "start_day": "Tuesday",
-    "end_day": "Tuesday",
-    "start_time": "2017-10-17T19:00:00.511Z",
-    "end_time": "2017-10-17T21:00:00.511Z",
+    "start_datetime": "2017-10-17T19:00:00.511Z",
+    "end_datetime": "2017-10-17T21:00:00.511Z",
+    "max_number_of_participants": 20,
     "address": {
       "place": "Sports hall 4",
       "institution": "ZSSW Bern",
@@ -28,8 +25,7 @@
       "number": 145,
       "plz": 3012,
       "city": "Bern"
-    },
-    "max_number_of_participants": 20
+    }
   }
 ]
 

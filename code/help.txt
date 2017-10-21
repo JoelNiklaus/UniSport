@@ -12,3 +12,6 @@ Switch to DB: "use UniSport"
 Example Database Queries:
 db.courses.find({"course_name": "Floorball"})
 db.reservations.find({"participants.firstname":"Wladimir"})
+
+For automatic server reload:
+npm install -g nodemon
