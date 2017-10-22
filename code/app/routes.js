@@ -1,6 +1,6 @@
 // grab the models
-var Course = require('./models/Course');
-var Reservation = require('./models/Reservation');
+const Course = require('./models/Course');
+const Reservation = require('./models/Reservation');
 
 module.exports = function (app) {
 
@@ -8,9 +8,33 @@ module.exports = function (app) {
     // handle things like api calls
     // authentication routes
 
-    app.get('/api/getCourse/:courseId', function (req, res) {
+
+
+    app.post('/api/makeReservation', function (req, res) {
+        Course.findById(req.body.course_id, function (err, course) {
+            if (err)
+                res.status(500).send("We need a valid course to make a reservation.");
+
+        });
+        if(!req.body.firstname || !req.body.lastname || !req.body.email)
+            res.status(500).send("We need you to fill out the entire form.");
+
+        // TODO validate, that each email can only be registered once per course!
+
+        new Reservation(req.body).save((err, createdReservation) => {
+            console.log(req.body.course_id);
+            if (err) {
+                res.status(500).send(err);
+            }
+            // This createdReservation is the same one we saved, but after Mongo
+            // added its additional properties like _id.
+            res.status(200).send(createdReservation);
+        });
+    });
+
+    app.get('/api/getCourse/:course_id', function (req, res) {
         // use mongoose to get a course from the database
-        Course.findById(req.params.courseId, function (err, course) {
+        Course.findById(req.params.course_id, function (err, course) {
             // if there is an error retrieving, send the error.
             // nothing after res.send(err) will execute
             if (err)

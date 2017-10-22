@@ -4,30 +4,41 @@
         <p>Make a reservation for the {{course.course_name}} course from {{course.start_datetime}} to
             {{course.end_datetime}} at {{course.address.place}} at {{course.address.institution}}.</p>
 
-        <form class="form-horizontal">
+        <form class="form-horizontal" ng-show="!success" class="ng-hide">
             <div class="form-group">
                 <label for="inputFirstName" class="col-sm-2 control-label">Firstname</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="inputFirstName" placeholder="Firstname">
+                    <input ng-model="formData.firstname" type="text" class="form-control" id="inputFirstName" placeholder="Firstname" required>
                 </div>
             </div>
             <div class="form-group">
                 <label for="inputLastName" class="col-sm-2 control-label">Lastname</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="inputLastName" placeholder="Lastname">
+                    <input ng-model="formData.lastname" type="text" class="form-control" id="inputLastName" placeholder="Lastname" required>
                 </div>
             </div>
             <div class="form-group">
                 <label for="inputEmail" class="col-sm-2 control-label">Email</label>
                 <div class="col-sm-10">
-                    <input type="email" class="form-control" id="inputEmail" placeholder="Email">
+                    <input ng-model="formData.email" type="email" class="form-control" id="inputEmail" placeholder="Email" required>
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
-                    <button type="submit" class="btn btn-primary">Make Reservation</button>
+                    <button ng-click="makeReservation(formData)" type="submit" class="btn btn-primary">Make Reservation</button>
                 </div>
             </div>
         </form>
+
+        <div ng-show="danger" class="ng-hide">
+            <div class="alert alert-danger" role="alert">
+                <strong>Damn it!</strong> {{danger}}
+            </div>
+        </div>
+        <div ng-show="success" class="ng-hide">
+            <div class="alert alert-success" role="alert">
+                <strong>Hooray!</strong> {{success}}
+            </div>
+        </div>
     </div>
 </div>

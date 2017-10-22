@@ -18,7 +18,7 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
 			controller: 'GeekController'	
 		})
 
-		.when('/reservation/:courseId', {
+		.when('/reservation/:course_id', {
 			templateUrl: 'views/reservation.html',
 			controller: 'ReservationController'
 		});
