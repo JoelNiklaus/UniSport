@@ -38,11 +38,29 @@
                     <p ng-bind-html="dossierCourant.description"><p>
                         <div ng-show="dossierCourant.label =='course' ">
                             <form>
-      <input type="text" ng-model="formData" placeholder="E">
+      <input type="text" ng-model="formData.course_name" placeholder="E">
       <button type="submit" class="btn btn-primary" ng-click="afficher(formData)">Submit</button>
 </form>
 
-               <div ng-show="showCourse == true" >{{nomDuCour}} 
+               <div ng-show="showCourse == true" >
+                <br>
+                <strong>nom du cours</strong> : {{nomDuCour}}
+                <br>
+                <strong>place du cours</strong> : {{PlaceDuCour}} 
+                <br>
+                <strong>start_time</strong> : {{start_time}}
+                <br>
+                <strong>end_time</strong> : {{end_time}} 
+                <br>
+                <strong>institution</strong>: {{institution}}
+                <br>
+               <strong> street</strong> : {{street}} 
+                <br>
+               <strong> number</strong>: {{number}}
+                <br>
+                <strong>city</strong> : {{city}} 
+                <br>
+                <strong>max_number_of_participants</strong> : {{max_number_of_participants}} 
                </div>
 
 

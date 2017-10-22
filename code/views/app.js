@@ -19,7 +19,21 @@ angular.module("Webmail", [ "ngSanitize" ])
 	$scope.dossierCourant = null;
 
 	$scope.showCourse = false;
-	$scope.nomDuCour="heloo";
+		$scope.nomDuCour="rien";
+	    $scope.PlaceDuCour="rien";
+	    $scope.start_time="rien";
+	    $scope.end_time="rien";
+	    $scope.institution="rien";
+	    $scope.street="rien";
+	    $scope.number="rien";
+	    $scope.city="rien";
+	    $scope.max_number_of_participants="rien";
+
+		
+
+
+
+
 
  
 
@@ -28,12 +42,22 @@ angular.module("Webmail", [ "ngSanitize" ])
 	
  
 	$scope.afficher = function(formData) {
+		var data = { 'course_name': formData };
         $scope.showCourse = true;
         console.log(formData);
 
         $http.post('/chercher',formData).
         then(function(response) {
-            $scope.nomDuCour=response.data;
+        	console.log(response.data[0].place);
+            $scope.PlaceDuCour=response.data[0].place;
+            $scope.nomDuCour=response.data[0].course_name;
+            $scope.start_time=response.data[0].start_time;
+            $scope.end_time=response.data[0].end_time;
+            $scope.institution=response.data[0].institution;
+            $scope.street=response.data[0].street;
+            $scope.number=response.data[0].number;
+            $scope.city=response.data[0].city;
+            $scope.max_number_of_participants=response.data[0].max_number_of_participants;
             console.log("posted successfully");
         }).catch(function(response) {
             console.error("error in posting");
