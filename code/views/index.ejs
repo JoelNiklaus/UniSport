@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
 <head>
+    <title><%= names %></title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf8"/>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -29,40 +30,18 @@
         <tbody>
         <tr ng-repeat="text in dossierCourant.text" class="clickable">
 
-
-                
-                    <p ng-bind-html="dossierCourant.description"><p>
-                        <div ng-show="dossierCourant.label =='course' ">
-                            <form>
-      <input type="text" ng-model="formData.course_name" placeholder="E">
-      <button type="submit" class="btn btn-primary" ng-click="afficher(formData)">Submit</button>
-</form>
-
-               <div ng-show="showCourse == true" >
-                <br>
-                <strong>nom du cours</strong> : {{nomDuCour}}
-                <br>
-                <strong>place du cours</strong> : {{PlaceDuCour}} 
-                <br>
-                <strong>start_time</strong> : {{start_time}}
-                <br>
-                <strong>end_time</strong> : {{end_time}} 
-                <br>
-                <strong>institution</strong>: {{institution}}
-                <br>
-               <strong> street</strong> : {{street}} 
-                <br>
-               <strong> number</strong>: {{number}}
-                <br>
-                <strong>city</strong> : {{city}} 
-                <br>
-                <strong>max_number_of_participants</strong> : {{max_number_of_participants}} 
-               </div>
         </tr>
         </tbody>
 
 
-        
+        <p ng-bind-html="dossierCourant.description">
+        <p>
+        <div ng-show="dossierCourant.label =='course' ">
+            <form action="/chercher" method="POST">
+                <input type="text" placeholder="name" name="name">
+                <button type="submit" ng-click="afficher()">Chercher</button>
+            </form>
+        </div>
 
 
     </div>

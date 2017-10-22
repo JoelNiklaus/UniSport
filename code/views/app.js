@@ -73,9 +73,6 @@ angular.module("Webmail", [ "ngSanitize" ])
 	
 
 	 
-		
-
-
 	 
 	$scope.selectionDossier = function(dossier) {
 		$scope.dossierCourant = dossier;
