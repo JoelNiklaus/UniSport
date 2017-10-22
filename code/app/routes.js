@@ -9,6 +9,9 @@ module.exports = function(app) {
 
     // sample api route
     app.get('/api/courses', function(req, res) {
+
+
+        //res.send("test");
         // use mongoose to get all nerds in the database
         Course.find(function(err, courses) {
 
@@ -17,6 +20,26 @@ module.exports = function(app) {
             if (err)
                 res.send(err);
 
+
+            //res.send("test");
+            res.json(courses); // return all nerds in JSON format
+        });
+    });
+
+    app.post('/chercher', function(req, res) {
+
+
+        //res.send("test");
+        // use mongoose to get all nerds in the database
+        Course.find(function(err, courses) {
+
+            // if there is an error retrieving, send the error.
+            // nothing after res.send(err) will execute
+            if (err)
+                res.send(err);
+
+
+            //res.send("test");
             res.json(courses); // return all nerds in JSON format
         });
     });
