@@ -23,6 +23,7 @@
                             <th>End</th>
                             <th>Maximum Participants</th>
                             <th>Place</th>
+                            <th>Reservation</th>
                         </tr>
                         <tr ng-repeat="course in searchCoursesResult">
                             <td>{{course.course_name}}</td>
@@ -30,7 +31,9 @@
                             <td>{{course.end_datetime}}</td>
                             <td>{{course.max_number_of_participants}}</td>
                             <td>{{course.address.place}}</td>
+                            <td><a href="reservation/{{course._id}}">Reserve place</a></td>
                         </tr>
+
                     </table>
                 </div>
 
