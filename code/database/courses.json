@@ -14,6 +14,20 @@
     }
   },
   {
+    "course_name": "Floorball",
+    "start_datetime": "2017-10-20T18:00:00.511Z",
+    "end_datetime": "2017-10-20T20:00:00.511Z",
+    "max_number_of_participants": 15,
+    "address": {
+      "place": "Sports hall 4",
+      "institution": "ZSSW Bern",
+      "street": "Bremgartenstrasse",
+      "number": 145,
+      "plz": 3012,
+      "city": "Bern"
+    }
+  },
+  {
     "course_name": "Soccer",
     "start_datetime": "2017-10-17T19:00:00.511Z",
     "end_datetime": "2017-10-17T21:00:00.511Z",
