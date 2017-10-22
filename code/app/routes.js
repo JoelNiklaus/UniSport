@@ -1,5 +1,6 @@
-// grab the nerd model we just created
+// grab the models
 var Course = require('./models/Course');
+var Reservation = require('./models/Reservation');
 
 module.exports = function (app) {
 
@@ -7,8 +8,20 @@ module.exports = function (app) {
     // handle things like api calls
     // authentication routes
 
+    app.get('/api/getCourse/:courseId', function (req, res) {
+        // use mongoose to get a course from the database
+        Course.findById(req.params.courseId, function (err, course) {
+            // if there is an error retrieving, send the error.
+            // nothing after res.send(err) will execute
+            if (err)
+                res.send(err);
+
+            res.json(course); // return found course in JSON format
+        });
+    });
+
     app.get('/api/allCourses', function (req, res) {
-        // use mongoose to get all nerds in the database
+        // use mongoose to get all courses in the database
         Course.find(function (err, courses) {
             // if there is an error retrieving, send the error.
             // nothing after res.send(err) will execute
@@ -20,7 +33,7 @@ module.exports = function (app) {
     });
 
     app.post('/api/searchCourses', function (req, res) {
-        // use mongoose to get all courses in the database
+        // use mongoose to search for courses in the database
         Course.find({course_name: new RegExp(req.body.course_name, "i")}, function (err, courses) {
             // if there is an error retrieving, send the error.
             // nothing after res.send(err) will execute
