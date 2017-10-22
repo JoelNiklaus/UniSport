@@ -1,26 +1,46 @@
-<div class="jumbotron text-center" ng-controller="CourseController">
-    <h1>Courses</h1>
+<div ng-controller="CourseController" data-ng-init="init()">
+    <div class="jumbotron text-center">
+        <h1>Courses</h1>
 
-    <p>{{ tagline }}</p>
+        <p>{{ tagline }}</p>
 
-    <div class="input-group input-group-lg">
-        <span class="input-group-addon glyphicon glyphicon-search" id="sizing-addon1" aria-hidden="true"></span>
-        <input type="text" class="form-control" ng-model="formData.course_name" ng-change="searchCourses(formData)"
-               placeholder="Search for Course Name" aria-describedby="sizing-addon1">
+        <div class="input-group input-group-lg">
+            <span class="input-group-addon glyphicon glyphicon-search" id="sizing-addon1" aria-hidden="true"></span>
+            <input type="text" class="form-control" ng-model="formData.course_name" ng-change="searchCourses(formData)"
+                   placeholder="Search for Course Name" aria-describedby="sizing-addon1">
+        </div>
+
     </div>
 
-    <div ng-show="searchCoursesResult">
-        <ul ng-repeat="course in searchCoursesResult">
-            <li>{{course}}</li>
-        </ul>
-    </div>
-    <div ng-show="searchCoursesResult.length==0" class="ng-hide">
-        <p>No courses found with course name "{{formData.course_name}}"</p>
-    </div>
+    <div class="row">
+        <div class="container">
+            <div ng-show="searchCoursesResult.length>0">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover">
+                        <tr>
+                            <th>Course Name</th>
+                            <th>Start</th>
+                            <th>End</th>
+                            <th>Maximum Participants</th>
+                            <th>Place</th>
+                        </tr>
+                        <tr ng-repeat="course in searchCoursesResult">
+                            <td>{{course.course_name}}</td>
+                            <td>{{course.start_datetime}}</td>
+                            <td>{{course.end_datetime}}</td>
+                            <td>{{course.max_number_of_participants}}</td>
+                            <td>{{course.address.place}}</td>
+                        </tr>
+                    </table>
+                </div>
 
-    <br><br>
-    <button class="btn btn-primary" ng-click="allCourses()">Show All Courses</button>
-    <ul ng-repeat="course in allCoursesResult">
-        <li>{{course}}</li>
-    </ul>
+            </div>
+            <div ng-show="searchCoursesResult.length==0" class="ng-hide">
+                <div class="alert alert-danger alert-dismissible" role="alert">
+                    <strong>Damn it!</strong> No courses found with course name "{{formData.course_name}}"
+                </div>
+            </div>
+
+        </div>
+    </div>
 </div>

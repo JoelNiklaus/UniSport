@@ -1,10 +1,10 @@
-angular.module('CourseCtrl', []).controller('CourseController', function ($scope, $http) {
+angular.module('CourseCtrl', []).controller('CourseController', function ($scope, $http, $window) {
 
     $scope.tagline = 'Here you can search all the listed courses. Just start typing, and it will automatigally search for you.';
 
-    $scope.allCourses = function () {
+    $scope.init = function () {
             $http.get('/api/allCourses').then(function (res) {
-            $scope.allCoursesResult = res.data;
+            $scope.searchCoursesResult = res.data;
         }).catch(function (err) {
             console.error(err);
         });

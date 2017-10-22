@@ -21,7 +21,7 @@ module.exports = function (app) {
 
     app.post('/api/searchCourses', function (req, res) {
         // use mongoose to get all courses in the database
-        Course.find({course_name: req.body.course_name}, function (err, courses) {
+        Course.find({course_name: new RegExp(req.body.course_name, "i")}, function (err, courses) {
             // if there is an error retrieving, send the error.
             // nothing after res.send(err) will execute
             if (err)
