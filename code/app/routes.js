@@ -9,14 +9,13 @@ module.exports = function (app) {
     // authentication routes
 
 
-
     app.post('/api/makeReservation', function (req, res) {
         Course.findById(req.body.course_id, function (err, course) {
             if (err)
                 res.status(500).send("We need a valid course to make a reservation.");
 
         });
-        if(!req.body.firstname || !req.body.lastname || !req.body.email)
+        if (!req.body.firstname || !req.body.lastname || !req.body.email)
             res.status(500).send("We need you to fill out the entire form.");
 
         // TODO validate, that each email can only be registered once per course!
@@ -59,6 +58,24 @@ module.exports = function (app) {
     app.post('/api/searchCourses', function (req, res) {
         // use mongoose to search for courses in the database
         Course.find({course_name: new RegExp(req.body.course_name, "i")}, function (err, courses) {
+            // if there is an error retrieving, send the error.
+            // nothing after res.send(err) will execute
+            if (err)
+                res.send(err);
+
+            res.json(courses); // return all courses in JSON format
+        });
+    });
+
+    app.post('/api/getCoursesByDateRange', function (req, res) {
+        // use mongoose to search for courses in the database
+        // TODO perhaps modify this (include end_datetime) if we have courses spanning over multiple days
+        Course.find({
+            start_datetime: {
+                $gte: req.body.start_datetime,
+                $lt: req.body.end_datetime
+            }
+        }, function (err, courses) {
             // if there is an error retrieving, send the error.
             // nothing after res.send(err) will execute
             if (err)

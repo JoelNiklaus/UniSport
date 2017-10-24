@@ -6,6 +6,10 @@ import database with the following command in commandline in the bin directory o
 mongoimport --db UniSport --collection courses --drop --file C:\Users\joeln\Documents\MEGA\Studium\Master\Informatik\WebEngineering\Project\code\database\courses.json --jsonArray
 mongoimport --db UniSport --collection reservations --drop --file C:\Users\joeln\Documents\MEGA\Studium\Master\Informatik\WebEngineering\Project\code\database\reservations.json --jsonArray
 
+IMPORTANT: mongoimport cannot convert the datestrings to date objects. Therefore we have to run this script each time after a mongoimport!
+Otherwise mongoose queries involving dates will return no results.
+db.courses.find().forEach(function(el){ el.start_datetime = new Date(el.start_datetime); el.end_datetime = new Date(el.end_datetime); db.courses.save(el) });
+
 
 Startup MongoDB: "mongo"
 Switch to DB: "use UniSport"

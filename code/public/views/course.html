@@ -12,6 +12,12 @@
 
     </div>
 
+
+    <!-- TODO Include reusable components (e.g. for search results):
+    https://stackoverflow.com/questions/13619264/reusable-components-in-angularjs
+    http://busypeoples.github.io/post/thinking-in-components-angular-js/
+    -->
+
     <div class="row">
         <div class="container">
             <div ng-show="searchCoursesResult.length>0">
@@ -36,7 +42,54 @@
 
                     </table>
                 </div>
+            </div>
+            <div ng-show="searchCoursesResult.length==0" class="ng-hide">
+                <div class="alert alert-danger" role="alert">
+                    <strong>Damn it!</strong> No courses found with course name "{{formData.course_name}}"
+                </div>
+            </div>
 
+        </div>
+    </div>
+<hr>
+    <div class="row">
+        <div class="container">
+            <h2>Date Search</h2>
+            <form>
+                <!-- TODO Mouad: Ca ne foncionne pas. Tu sais pourquoi? le model n'est pas trouvé-->
+                <div class="input-group input-group-lg">
+                    <input type="text" class="form-control" ng-model="dateSearch.start_datetime"
+                           placeholder="Search for a specific date" aria-describedby="sizing-addon2" jqdatepicker>
+                    <span class="input-group-btn" id="sizing-addon2" aria-hidden="true">
+                        <button type="button" class="btn btn-primary" ng-click="getCoursesByDateRange(dateSearch)">
+                            <span class="glyphicon glyphicon-search"> Search</span>
+                        </button>
+                    </span>
+                </div>
+            </form>
+
+            <div ng-show="searchCoursesResult.length>0">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover">
+                        <tr>
+                            <th>Course Name</th>
+                            <th>Start</th>
+                            <th>End</th>
+                            <th>Maximum Participants</th>
+                            <th>Place</th>
+                            <th>Reservation</th>
+                        </tr>
+                        <tr ng-repeat="course in searchCoursesResult">
+                            <td>{{course.course_name}}</td>
+                            <td>{{course.start_datetime}}</td>
+                            <td>{{course.end_datetime}}</td>
+                            <td>{{course.max_number_of_participants}}</td>
+                            <td>{{course.address.place}}</td>
+                            <td><a href="reservation/{{course._id}}">Reserve place</a></td>
+                        </tr>
+
+                    </table>
+                </div>
             </div>
             <div ng-show="searchCoursesResult.length==0" class="ng-hide">
                 <div class="alert alert-danger" role="alert">
@@ -47,15 +100,72 @@
         </div>
     </div>
 
+
     <div class="row">
         <div class="container">
             <h2>Happening today</h2>
+            <div ng-show="coursesToday.length>0">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover">
+                        <tr>
+                            <th>Course Name</th>
+                            <th>Start</th>
+                            <th>End</th>
+                            <th>Maximum Participants</th>
+                            <th>Place</th>
+                            <th>Reservation</th>
+                        </tr>
+                        <tr ng-repeat="course in coursesToday">
+                            <td>{{course.course_name}}</td>
+                            <td>{{course.start_datetime}}</td>
+                            <td>{{course.end_datetime}}</td>
+                            <td>{{course.max_number_of_participants}}</td>
+                            <td>{{course.address.place}}</td>
+                            <td><a href="reservation/{{course._id}}">Reserve place</a></td>
+                        </tr>
+
+                    </table>
+                </div>
+            </div>
+            <div ng-show="coursesToday.length==0" class="ng-hide">
+                <div class="alert alert-danger" role="alert">
+                    <strong>Damn it!</strong> There are no courses today.
+                </div>
+            </div>
         </div>
     </div>
 
     <div class="row">
         <div class="container">
             <h2>Happening this week</h2>
+            <div ng-show="coursesWeek.length>0">
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover">
+                        <tr>
+                            <th>Course Name</th>
+                            <th>Start</th>
+                            <th>End</th>
+                            <th>Maximum Participants</th>
+                            <th>Place</th>
+                            <th>Reservation</th>
+                        </tr>
+                        <tr ng-repeat="course in coursesWeek">
+                            <td>{{course.course_name}}</td>
+                            <td>{{course.start_datetime}}</td>
+                            <td>{{course.end_datetime}}</td>
+                            <td>{{course.max_number_of_participants}}</td>
+                            <td>{{course.address.place}}</td>
+                            <td><a href="reservation/{{course._id}}">Reserve place</a></td>
+                        </tr>
+
+                    </table>
+                </div>
+            </div>
+            <div ng-show="coursesWeek.length==0" class="ng-hide">
+                <div class="alert alert-danger" role="alert">
+                    <strong>Damn it!</strong> There are no courses this week.
+                </div>
+            </div>
         </div>
     </div>
 </div>
