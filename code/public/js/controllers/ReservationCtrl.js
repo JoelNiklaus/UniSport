@@ -13,8 +13,11 @@ angular.module('ReservationCtrl', []).controller('ReservationController', functi
     // TODO perform more client side form validation
 
     $scope.makeReservation = function (formData) {
+        if(formData.$valid){
+            var newformData= angular.copy(formData);
+
         formData.course_id = $scope.course_id;
-        $http.post('/api/makeReservation', formData).then(function (res) {
+        $http.post('/api/makeReservation', newformData).then(function (res) {
             $scope.success = "Successfully reserved a space.";
             console.log(res);
         }).catch(function (err) {
@@ -22,4 +25,5 @@ angular.module('ReservationCtrl', []).controller('ReservationController', functi
             console.error(err);
         });
     }
+}
 });
