@@ -1,5 +1,8 @@
 angular.module('CourseCtrl', []).controller('CourseController', function ($scope, $http) {
 
+    // TODO search by date
+    // TODO search by address
+
     $scope.tagline = 'Here you can search all the listed courses. Just start typing, and it will automatigally search for you.';
 
     $scope.init = function () {
