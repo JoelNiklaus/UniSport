@@ -1,1 +1,0 @@
-var app = angular.module('UniSport', ['ngRoute', 'appRoutes', 'appDirectives', 'MainCtrl', 'CourseCtrl', 'CourseService', 'ReservationCtrl', 'ReservationService', 'GeekCtrl', 'GeekService']);

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" lang="fr">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf8" />
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <title>TUTORIAL</title>
+        <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+        <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+        <!--[if lt IE 9]>
+            <script src="html5shiv.js"></script>
+        <![endif]-->
+
+    </head>
+    <div class="jumbotron">
+  <h1>SIMPLE EXAMPLE</h1>      
+  <p>Group5</p>
+</div>
+    <body ng-app="SAMPLETUTO" ng-controller="SAMPLECTRL">
+
+        <div class="container">
+
+                         <p>Insert a task  to MongoDB</p>
+                            <form>
+             <input type="text" ng-model="formData.name" placeholder="Task">
+             <button type="submit" class="btn btn-secondary" ng-click="add(formData)">insert</button>
+              <button type="submit" class="btn btn-secondary" ng-click="delete(formData)">delete</button>
+              <button type="submit" class="btn btn-secondary" ng-click="show()">show</button>
+
+                            </form>
+
+               <div ng-show="insertIS == true" >  <b>you have added in the db the task :</b>{{insertdata}} 
+               </div>
+                <div ng-show="deleteIS == true" ><strong>{{deletedata}} </strong>
+               </div>
+               <div ng-show="showIS == true"  > 
+                      <table class="table table-condensed">
+                         <thead>
+      <tr>
+        <th>name:</th>
+        <th>id</th>
+      </tr>
+    </thead>
+   
+    <tbody>
+      <tr ng-repeat="task in tasks">
+        <td>{{task.name}}</td>
+        <td>{{task._id}}</td>
+      </tr>
+    
+    </tbody>
+  </table>        
+  
+
+               </div>
+
+
+  </div>
+        
+   
+
+
+
+            
+                
+
+       
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.29/angular.min.js"></script>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.29/angular-sanitize.min.js"></script>
+        <script type="text/javascript" src="app.js"></script>             
+
+    </body>
+</html>

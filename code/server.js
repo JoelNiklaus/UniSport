@@ -1,47 +1,109 @@
-// modules =================================================
-var express        = require('express');
-var app            = express();
-var mongoose       = require('mongoose');
-var bodyParser     = require('body-parser');
-var methodOverride = require('method-override');
 
-// configuration ===========================================
-	
-// config files
-var db = require('./config/db');
+const express = require('express');
+const bodyParser= require('body-parser')
+const app = express()
+const url ="mongodb://localhost:27017/names";
 
-var port = process.env.PORT || 8080; // set our port
-var options = {
-    useMongoClient: true,
-    autoIndex: false, // Don't build indexes
-    reconnectTries: Number.MAX_VALUE, // Never stop trying to reconnect
-    reconnectInterval: 500, // Reconnect every 500ms
-    poolSize: 10, // Maintain up to 10 socket connections
-    // If not connected, return errors immediately rather than waiting for reconnect
-    bufferMaxEntries: 0
-};
-mongoose.connect(db.url, options); // connect to our mongoDB database (commented out after you enter in your own credentials)
-var db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function() {
-    // we're connected!
-    console.log("Hooray, we are connected to our mongodb database!");
+
+const MongoClient = require('mongodb').MongoClient;
+
+var db
+
+MongoClient.connect(url, (err, database) => {
+  if (err) return console.log(err)
+  db = database
+  
 });
 
-// get all data/stuff of the body (POST) parameters
-app.use(bodyParser.json()); // parse application/json 
-app.use(bodyParser.json({ type: 'application/vnd.api+json' })); // parse application/vnd.api+json as json
-app.use(bodyParser.urlencoded({ extended: true })); // parse application/x-www-form-urlencoded
-
-app.use(methodOverride('X-HTTP-Method-Override')); // override with the X-HTTP-Method-Override header in the request. simulate DELETE/PUT
-app.use(express.static(__dirname + '/public')); // set the static files location /public/img will be /img for users
-
-// routes ==================================================
-require('./app/routes')(app); // pass our application into our routes
-
-// start app ===============================================
-app.listen(port);	
-console.log('Magic happens on port ' + port); 			// shoutout to the user
-exports = module.exports = app; 						// expose app
 
 
+
+
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
+
+
+app.use(express.static(__dirname+'/views'))
+
+app.get('/',function(req,res){
+  res.sendFile('index.html');
+})
+
+
+
+  app.post('/insert', (req, res) => {
+  	  console.log(req.body);
+      var l = req.body.name;
+      var query = { 'name': l}
+            console.log(query);
+
+      
+
+  db.collection('insert').save(req.body, (err, result) => {
+   if (err) return console.log(err);
+
+   db.collection("insert").find(query).toArray(function(err, result) {
+    if (err) throw err;
+  res.set('Access-Control-Allow-Origin', '*');
+    console.log(result)
+
+
+  res.json(result);
+    
+
+ });
+  });
+
+  
+
+
+});
+
+
+app.post('/delete', (req, res) => {
+        console.log("todelete");
+
+      console.log(req.body);
+      var l = req.body.name;
+      var query = { 'name': l}
+            console.log(query);
+
+      
+
+  db.collection("insert").deleteMany(query, function(err, obj) {
+    if (err) throw err;
+
+    console.log(obj.result.n+"   document deleted");
+    res.json(obj.result);
+  });
+
+    
+
+ });
+
+app.get('/show', (req, res) => {
+        console.log("show");
+
+      
+
+  db.collection("insert").find({}).toArray(function(err, result) {
+    if (err) throw err;
+
+    console.log(result);
+    res.json(result);
+  });
+
+    
+
+ });
+  
+  
+
+
+
+
+
+
+  app.listen(3000, () => {
+    console.log('listening on 3000')
+  });
