@@ -10,7 +10,7 @@ angular.module('CourseCtrl', []).controller('CourseController', function ($scope
     $scope.tagline = 'Here you can search all the listed courses. Just start typing, and it will automatigally search for you.';
 
     function tomorrow(date) {
-        let tomorrow = new Date(date);
+        var tomorrow = new Date(date);
         tomorrow.setDate(new Date().getDate() + 1);
         return tomorrow;
     }
@@ -25,7 +25,7 @@ angular.module('CourseCtrl', []).controller('CourseController', function ($scope
     }
 
     function getCoursesToday() {
-        let req = new XMLHttpRequest();
+        var req = new XMLHttpRequest();
         // Fetch today's Courses
         req.start_datetime = new Date(); // today
         req.end_datetime = tomorrow(new Date());
@@ -38,10 +38,10 @@ angular.module('CourseCtrl', []).controller('CourseController', function ($scope
     }
 
     function getCoursesWeek() {
-        let req = new XMLHttpRequest();
+        var req = new XMLHttpRequest();
         // Fetch today's Courses
         req.start_datetime = new Date(); // today
-        let nextWeek = new Date();
+        var nextWeek = new Date();
         nextWeek.setDate(new Date().getDate() + 7); // next week
         req.end_datetime = nextWeek;
 
