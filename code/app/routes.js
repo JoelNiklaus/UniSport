@@ -8,27 +8,53 @@ module.exports = function (app) {
     // handle things like api calls
     // authentication routes
 
+     
+    app.post('/api/makeReservation', function (req, res, next) {
+        var f=false;
+        var course1 =req.body.course_id ;
 
-    app.post('/api/makeReservation', function (req, res) {
+
+
+
         Course.findById(req.body.course_id, function (err, course) {
             if (err)
                 res.status(500).send("We need a valid course to make a reservation.");
 
         });
+
+
+        Reservation.find({email: new RegExp(req.body.email, "i")}, function (err, reserv) {
+            var j;
+            for(j=0;j<reserv.length;j++){
+                if(reserv[j].course_id==course1) f=true;
+            }
+            
+
+        });  
+
         if (!req.body.firstname || !req.body.lastname || !req.body.email)
             res.status(500).send("We need you to fill out the entire form.");
 
         // TODO validate, that each email can only be registered once per course!
 
         new Reservation(req.body).save((err, createdReservation) => {
-            console.log(req.body.course_id);
+            console.log(f);
+            if(f==false){
+            console.log(f);
             if (err) {
                 res.status(500).send(err);
             }
             // This createdReservation is the same one we saved, but after Mongo
             // added its additional properties like _id.
             res.status(200).send(createdReservation);
-        });
+            res.end("ok");
+        }else{
+            res.send("Sorry your are already registered this course ");
+        } }
+
+        );
+    
+    
     });
 
     app.get('/api/getCourse/:course_id', function (req, res) {

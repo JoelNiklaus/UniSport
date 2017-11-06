@@ -18,11 +18,18 @@ angular.module('ReservationCtrl', []).controller('ReservationController', functi
         if(formData.$valid){
             var newformData= angular.copy(formData);
 
-        formData.course_id = $scope.course_id;
+        newformData.course_id = $scope.course_id;
         $http.post('/api/makeReservation', newformData).then(function (res) {
+            if(res.data.lastname != null){
             $scope.success = "Successfully reserved a space.";
-            console.log(res);
+            }
+            else{
+            $scope.danger = ""+res.data;
+
+            }
+
         }).catch(function (err) {
+            console.log(err.data);
             $scope.danger = "An error occurred. Could not reserve a space: " + err;
             console.error(err);
         });
