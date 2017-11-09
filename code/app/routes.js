@@ -10,8 +10,8 @@ module.exports = function (app) {
 
      
     app.post('/api/makeReservation', function (req, res, next) {
-        var f=false;
-        var course1 =req.body.course_id ;
+        var check=false;   //this check var will tell us if there is a student already registred on the current course
+        var course1 =req.body.course_id ;  
 
 
 
@@ -22,11 +22,11 @@ module.exports = function (app) {
 
         });
 
-
+//here i go to the reservation db and i check all the mongodb object where i have the current email and surely check if it's the current course
         Reservation.find({email: new RegExp(req.body.email, "i")}, function (err, reserv) {
             var j;
             for(j=0;j<reserv.length;j++){
-                if(reserv[j].course_id==course1) f=true;
+                if(reserv[j].course_id==course1) check=true;
             }
             
 
@@ -38,9 +38,8 @@ module.exports = function (app) {
         // TODO validate, that each email can only be registered once per course!
 
         new Reservation(req.body).save((err, createdReservation) => {
-            console.log(f);
-            if(f==false){
-            console.log(f);
+            if(check==false){
+            
             if (err) {
                 res.status(500).send(err);
             }
