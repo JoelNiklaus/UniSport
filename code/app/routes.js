@@ -15,7 +15,6 @@ module.exports = function (app) {
 
 
 
-
         Course.findById(req.body.course_id, function (err, course) {
             if (err)
                 res.status(500).send("We need a valid course to make a reservation.");
@@ -27,10 +26,9 @@ module.exports = function (app) {
             var j;
             for(j=0;j<reserv.length;j++){
                 if(reserv[j].course_id==course1) check=true;
-            }
-            
 
-        });  
+            }
+        });
 
         if (!req.body.firstname || !req.body.lastname || !req.body.email)
             res.status(500).send("We need you to fill out the entire form.");
@@ -38,23 +36,25 @@ module.exports = function (app) {
         // TODO validate, that each email can only be registered once per course!
 
         new Reservation(req.body).save((err, createdReservation) => {
-            if(check==false){
-            
-            if (err) {
-                res.status(500).send(err);
+                if (!check) {
+                    if (err) {
+                        res.status(500).send(err);
+                    }
+                    // This createdReservation is the same one we saved, but after Mongo
+                    // added its additional properties like _id.
+                    res.status(200).send(createdReservation);
+                    res.end("ok");
+                } else {
+                    res.send("your are already registered for this course.");
+                }
             }
-            // This createdReservation is the same one we saved, but after Mongo
-            // added its additional properties like _id.
-            res.status(200).send(createdReservation);
-            res.end("ok");
-        }else{
-            res.send("Sorry your are already registered this course ");
-        } }
+            );
+        
 
-        );
-    
+
     
     });
+
 
     app.get('/api/getCourse/:course_id', function (req, res) {
         // use mongoose to get a course from the database
