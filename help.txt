@@ -2,9 +2,13 @@ Here we can write useful commands and help text:
 
 you can use "npm start" to start up server (because of script in package.json file)
 
+LOCAL DATABASE:
 import database with the following command in commandline in the bin directory of your mongodb installation (edit path!):
 mongoimport --db UniSport --collection courses --drop --file C:\Users\joeln\Documents\MEGA\Studium\Master\Informatik\WebEngineering\Project\code\database\courses.json --jsonArray
 mongoimport --db UniSport --collection reservations --drop --file C:\Users\joeln\Documents\MEGA\Studium\Master\Informatik\WebEngineering\Project\code\database\reservations.json --jsonArray
+
+MLAB DATABASE:
+mongoimport -h ds255455.mlab.com:55455 -d unisport -c courses -u unisport -p unisport --file C:\Users\joeln\Documents\MEGA\Studium\Master\Informatik\WebEngineering\Project\database\courses.json --jsonArray
 
 IMPORTANT: mongoimport cannot convert the datestrings to date objects. Therefore we have to run this script each time after a mongoimport!
 Otherwise mongoose queries involving dates will return no results.
