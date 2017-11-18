@@ -12,12 +12,14 @@ module.exports = function (app) {
     app.post('/api/makeReservation', function (req, res, next) {
         var check=false;   //this check var will tell us if there is a student already registred on the current course
         var course1 =req.body.course_id ;  
+        var n; // variable to store the current number of participants
 
 
 
         Course.findById(req.body.course_id, function (err, course) {
             if (err)
                 res.status(500).send("We need a valid course to make a reservation.");
+            n=course.number_of_participants; // store it here
 
         });
 
@@ -28,6 +30,12 @@ module.exports = function (app) {
                 if(reserv[j].course_id==course1) check=true;
 
             }
+        });
+
+        Course.findById(req.body.course_id, function (err, course) {
+            if (err)
+                res.status(500).send("We need a valid course to make a reservation.");
+
         });
 
         if (!req.body.firstname || !req.body.lastname || !req.body.email)
@@ -42,8 +50,26 @@ module.exports = function (app) {
                     }
                     // This createdReservation is the same one we saved, but after Mongo
                     // added its additional properties like _id.
+                else{   
+
+        Course.findById(req.body.course_id, function (err, course) {
+            if (err) handleErro(err);
+                
+            course.number_of_participants=n+1;  //increment the current number
+                course.save((err,todo)=>{//save it 
+                    if(err) console.log(err);
+
+                });
+
+
+            } 
+
+        );
+
+            
+            
                     res.status(200).send(createdReservation);
-                    res.end("ok");
+                    res.end("ok");}
                 } else {
                     res.send("your are already registered for this course.");
                 }
@@ -85,12 +111,20 @@ module.exports = function (app) {
         Course.find({course_name: new RegExp(req.body.course_name, "i")}, function (err, courses) {
             // if there is an error retrieving, send the error.
             // nothing after res.send(err) will execute
+       
+
             if (err)
                 res.send(err);
 
+            
             res.json(courses); // return all courses in JSON format
         });
     });
+
+   
+ 
+
+        
 
     app.post('/api/getCoursesByDateRange', function (req, res) {
         // use mongoose to search for courses in the database

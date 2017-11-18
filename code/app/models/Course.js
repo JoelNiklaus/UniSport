@@ -8,6 +8,7 @@ var courseSchema = new Schema({
     course_name: String,
     start_datetime: Date,
     end_datetime: Date,
+    number_of_participants: Number,
     max_number_of_participants: Number,
     address: {
         place: String,

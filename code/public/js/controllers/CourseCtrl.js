@@ -8,21 +8,29 @@ angular.module('CourseCtrl', []).controller('CourseController', function ($scope
     // TODO search by address
 
     $scope.tagline = 'Here you can search all the listed courses. Just start typing, and it will automatigally search for you.';
+       $scope.n;
+       var m;
+       var map = new Map();
 
     function tomorrow(date) {
         var tomorrow = new Date(date);
+
         tomorrow.setDate(new Date().getDate() + 1);
         return tomorrow;
     }
-
+     
     function getAllCourses() {
         // Fetch all Courses
         $http.get('/api/allCourses').then(function (res) {
+
             $scope.searchCoursesResult = res.data;
+
         }).catch(function (err) {
             console.error(err);
         });
-    }
+    };
+
+
 
     function getCoursesToday() {
         var req = new XMLHttpRequest();
@@ -60,9 +68,26 @@ angular.module('CourseCtrl', []).controller('CourseController', function ($scope
         getAllCourses();
     };
 
+    $scope.IsReached = function (course) {
+         return (course.number_of_participants==course.max_number_of_participants);
+    };
+  
+
+$scope.disabled = function(course) {
+  if($scope.IsReached(course)) { return false;}
+}
+
+
+
+          
+
     $scope.searchCourses = function (formData) {
         $http.post('/api/searchCourses', formData).then(function (res) {
-            $scope.searchCoursesResult = res.data;
+           // $scope.searchCoursesResult = res.data;
+                 
+             $scope.searchCoursesResult =res.data ;
+           
+
         }).catch(function (err) {
             console.error(err);
         });
@@ -73,7 +98,6 @@ angular.module('CourseCtrl', []).controller('CourseController', function ($scope
             dateSearch.end_datetime = tomorrow(dateSearch.start_datetime);
         $http.post('/api/getCoursesByDateRange', dateSearch).then(function (res) {
             $scope.coursesInDateRange = res.data;
-            console.log(res.data);
         }).catch(function (err) {
             console.error(err);
         });

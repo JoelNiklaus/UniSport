@@ -24,6 +24,7 @@ angular.module('ReservationCtrl', []).controller('ReservationController', functi
                     $scope.success = "Successfully reserved a space.";
                 }
                 else {
+                    console.log(res.data);
                     $scope.danger = "" + res.data;
 
                 }
