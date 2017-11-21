@@ -7,7 +7,7 @@ module.exports = function (app) {
     // server routes ===========================================================
     // handle things like api calls
     // authentication routes
-
+//
      
     app.post('/api/makeReservation', function (req, res, next) {
         var check=false;   //this check var will tell us if there is a student already registred on the current course
@@ -19,10 +19,10 @@ module.exports = function (app) {
         Course.findById(req.body.course_id, function (err, course) {
             if (err)
                 res.status(500).send("We need a valid course to make a reservation.");
-            n=course.number_of_participants; // store it here
+            n=course.number_of_participants; // store the current number here 
 
         });
-
+//
 //here i go to the reservation db and i check all the mongodb object where i have the current email and surely check if it's the current course
         Reservation.find({email: new RegExp(req.body.email, "i")}, function (err, reserv) {
             var j;

@@ -67,7 +67,7 @@ angular.module('CourseCtrl', []).controller('CourseController', function ($scope
 
         getAllCourses();
     };
-
+////
     $scope.IsReached = function (course) {
          return (course.number_of_participants==course.max_number_of_participants);
     };

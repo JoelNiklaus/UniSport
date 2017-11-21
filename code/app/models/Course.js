@@ -21,3 +21,4 @@ var courseSchema = new Schema({
 });
 module.exports = mongoose.model('Course', courseSchema);
 
+///
