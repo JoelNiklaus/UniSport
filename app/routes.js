@@ -1,6 +1,7 @@
 // grab the models
 const Course = require('./models/Course');
 const Reservation = require('./models/Reservation');
+var verifier = require('email-verify');
 
 module.exports = function (app) {
 
@@ -13,10 +14,17 @@ module.exports = function (app) {
         var check=false;   //this check var will tell us if there is a student already registred on the current course
         var course1 =req.body.course_id ;  
         var n; // variable to store the current number of participants
+                  verifier.verify(req.body.email, function( err, info ){
 
 
 
-        Course.findById(req.body.course_id, function (err, course) {
+
+
+
+  if( err ) res.end("email not valid");
+  else{
+
+         Course.findById(req.body.course_id, function (err, course) {
             if (err)
                 res.status(500).send("We need a valid course to make a reservation.");
             n=course.number_of_participants; // store the current number here 
@@ -76,6 +84,11 @@ module.exports = function (app) {
             }
             );
         
+    
+  }
+});
+
+   
 
 
     
