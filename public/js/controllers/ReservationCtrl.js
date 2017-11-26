@@ -1,4 +1,4 @@
-angular.module('ReservationCtrl', ['loadingButton']).controller('ReservationController', function ($scope, $http, $routeParams) {
+angular.module('ReservationCtrl', []).controller('ReservationController', function ($scope, $http, $routeParams) {
     $scope.course_id = $routeParams.course_id;
 
     $scope.init = function () {
