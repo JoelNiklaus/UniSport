@@ -9,6 +9,9 @@ angular.module('CourseCtrl', []).controller('CourseController', function ($scope
 
     $scope.tagline = 'Here you can search all the listed courses. Just start typing, and it will automatigally search for you.';
        $scope.n;
+        $scope.isClicked=true;
+                $scope.details="hello test";
+
        var m;
        var map = new Map();
 
