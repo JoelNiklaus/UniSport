@@ -1,1 +1,42 @@
 body { padding-top:30px; }
+
+.disabled {
+  cursor: not-allowed;
+    opacity: .65;
+        pointer-events: none; 
+
+
+}
+
+
+
+
+body { 
+   background: transparent url(../image/image2.jpg) no-repeat;
+    height: 100%;
+}
+
+table {
+    border-collapse: separate;
+    border-spacing: 0 5px;
+    padding: 10px;
+}
+div {
+
+	margin-bottom: :500px;
+
+}
+#divouter, #divouter2 { 
+    padding:190px;
+    
+    
+    background-color:#f0f0f5;
+
+}
+
+
+br {
+  content: " ";
+  display: block;
+  margin: 200px;
+}
