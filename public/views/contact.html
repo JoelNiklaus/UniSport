@@ -1,5 +1,66 @@
-<div class="jumbotron text-center">
-	<h1>How can you contact us?</h1>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="jumbotron text-center">
+	            <h1>How can you contact us?</h1>
 
-	<p>{{ tagline }}</p>
+	            <p>{{ tagline }}</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <p><h3>These are the people who will answer your questions:</h3></p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="thumbnail">
+                <img src="../../images/UserIcon.png" class="img-responsive" style="width:50%" id="jn">
+                <p class="text-center"><label for="jn">Joël Niklaus</label></p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="thumbnail">
+                <img src="../../images/UserIcon.png" class="img-responsive" style="width:50%" id="mk">
+                <p class="text-center"><label for="mk">Mouad Kondah</label></p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="thumbnail">
+                <img src="../../images/VictorHutse.png" class="img-responsive" style="width:50%" id="vh">
+                <p class="text-center"><label for="vh">Victor Hutse</label></p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+	<div class="row">
+		<div class="col-xs-12">
+			<h3>Fill in this form to send us your remaining questions.</h3>
+			<form action="" method="">
+				<div class="form-group">
+					<label for="first-name">First Name</label>
+					<input type="text" class="form-control" id="first-name"/>
+				</div>
+				<div class="form-group">
+					<label for="last-name">Last Name</label>
+					<input type="text" class="form-control" id="last-name"/>
+				</div>
+				<div class="form-group">
+					<label for="email">E-Mail Address</label>
+					<input type="email" class="form-control" id="email"/>
+				</div>
+				<div class="form-group">
+					<label for="message">Message</label>
+					<textarea class="form-control" rows="6" id="message"></textarea>
+				</div>
+                <div class="form-group">
+                    <input type="submit" id="submit" class="btn btn-default" value="Submit"/>
+                </div>
+			</form>
+		</div>
+	</div>
 </div>

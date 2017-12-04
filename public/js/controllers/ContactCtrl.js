@@ -1,5 +1,5 @@
 angular.module('ContactCtrl', []).controller('ContactController', function($scope) {
 
-	$scope.tagline = 'For further questions, these are the people you can contact.';	
+	$scope.tagline = 'For further questions, you can contact us through this page.';
 
 });
