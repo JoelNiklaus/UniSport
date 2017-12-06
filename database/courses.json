@@ -3,6 +3,7 @@
     "course_name": "Football",
     "start_datetime": "2017-12-16T21:00:00.511Z",
     "end_datetime": "2017-12-16T23:00:00.511Z",
+    "number_of_participants": 0,
     "max_number_of_participants": 20,
     "address": {
       "place": "Sports hall 4",
@@ -17,6 +18,7 @@
     "course_name": "Floorball",
     "start_datetime": "2017-10-24T18:00:00.511Z",
     "end_datetime": "2017-10-24T20:00:00.511Z",
+    "number_of_participants": 0,
     "max_number_of_participants": 20,
     "address": {
       "place": "Sports hall 4",
@@ -31,6 +33,7 @@
     "course_name": "Floorball",
     "start_datetime": "2017-10-20T18:00:00.511Z",
     "end_datetime": "2017-10-20T20:00:00.511Z",
+    "number_of_participants": 14,
     "max_number_of_participants": 15,
     "address": {
       "place": "Sports hall 4",
@@ -45,6 +48,7 @@
     "course_name": "Swimming",
     "start_datetime": "2017-11-17T17:00:00.511Z",
     "end_datetime": "2017-11-17T18:00:00.511Z",
+    "number_of_participants": 0,
     "max_number_of_participants": 10,
     "address": {
       "place": "Hirschengraben",
@@ -59,6 +63,7 @@
     "course_name": "Soccer",
     "start_datetime": "2017-10-17T19:00:00.511Z",
     "end_datetime": "2017-10-17T21:00:00.511Z",
+    "number_of_participants": 0,
     "max_number_of_participants": 20,
     "address": {
       "place": "Artificial Lawn",
@@ -73,6 +78,7 @@
     "course_name": "Soccer",
     "start_datetime": "2017-10-27T19:00:00.511Z",
     "end_datetime": "2017-10-27T21:00:00.511Z",
+     "number_of_participants": 0,
     "max_number_of_participants": 20,
     "address": {
       "place": "Artificial Lawn",
@@ -87,6 +93,7 @@
     "course_name": "Soccer",
     "start_datetime": "2017-10-12T19:00:00.511Z",
     "end_datetime": "2017-10-12T21:00:00.511Z",
+     "number_of_participants": 3,
     "max_number_of_participants": 20,
     "address": {
       "place": "Field 5",
@@ -98,4 +105,3 @@
     }
   }
 ]
-

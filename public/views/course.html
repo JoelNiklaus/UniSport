@@ -15,30 +15,41 @@
 
     <!-- TODO Include reusable components (e.g. for search results):
     https://stackoverflow.com/questions/13619264/reusable-components-in-angularjs
-    http://busypeoples.github.io/post/thinking-in-components-angular-js/
+    http://busypeoples.github.io/post/thinking-in-components-angular-js/  >>>>>/
     -->
 
     <div class="row">
         <div class="container">
             <div ng-show="searchCoursesResult.length>0">
-                <div class="table-responsive">
-                    <table class="table table-bordered table-hover">
+                <div class="table-responsive" >
+                    <table style="width:100%;text-align:left;background-color:#f0f0f5;" class="table table-bordered table-hover" >
                         <tr>
                             <th>Course Name</th>
                             <th>Start</th>
                             <th>End</th>
                             <th>Maximum Participants</th>
                             <th>Place</th>
+                            <th>number of participant</th>
+
                             <th>Reservation</th>
+
                         </tr>
-                        <tr ng-repeat="course in searchCoursesResult">
-                            <td>{{course.course_name}}</td>
+                        <tr ng-repeat-start="course in searchCoursesResult"   >
+                            <td > <a href="#" ng-click="isClicked = !isClicked">{{course.course_name}}</a></td>
                             <td>{{course.start_datetime}}</td>
                             <td>{{course.end_datetime}}</td>
                             <td>{{course.max_number_of_participants}}</td>
                             <td>{{course.address.place}}</td>
-                            <td><a href="reservation/{{course._id}}">Reserve place</a></td>
+                            <td>{{course.number_of_participants}}</td>
+
+                            <td><a href="reservation/{{course._id}}"  ng-click="disabled(course)" ng-class="{disabled: IsReached(course)}" >Reserve place</a></td>
                         </tr>
+
+                   <tr collapse="isClicked" ng-repeat-end="">
+            <td colspan="7">
+              <p>some details about {{course.course_name}} </p>
+            </td>
+          </tr>
 
                     </table>
                 </div>
@@ -70,24 +81,34 @@
 
             <div ng-show="searchCoursesResult.length>0">
                 <div class="table-responsive">
-                    <table class="table table-bordered table-hover">
+                   <table style="width:100%;text-align:left;background-color:#f0f0f5;" class="table table-bordered table-hover" >
                         <tr>
                             <th>Course Name</th>
                             <th>Start</th>
                             <th>End</th>
                             <th>Maximum Participants</th>
                             <th>Place</th>
+                            <th>number of participant</th>
+
                             <th>Reservation</th>
+
                         </tr>
-                        <tr ng-repeat="course in searchCoursesResult">
-                            <td>{{course.course_name}}</td>
+                        <tr ng-repeat-start="course in searchCoursesResult"   >
+                            <td > <a href="#" ng-click="isClicked = !isClicked">{{course.course_name}}</a></td>
                             <td>{{course.start_datetime}}</td>
                             <td>{{course.end_datetime}}</td>
                             <td>{{course.max_number_of_participants}}</td>
                             <td>{{course.address.place}}</td>
-                            <td><a href="reservation/{{course._id}}">Reserve place</a></td>
+                            <td>{{course.number_of_participants}}</td>
+
+                            <td><a href="reservation/{{course._id}}"  ng-click="disabled(course)" ng-class="{disabled: IsReached(course)}" >Reserve place</a></td>
                         </tr>
 
+                   <tr collapse="isClicked" ng-repeat-end="">
+            <td colspan="7">
+              <p>some details about {{course.course_name}} </p>
+            </td>
+          </tr>
                     </table>
                 </div>
             </div>
@@ -106,25 +127,34 @@
             <h2>Happening today</h2>
             <div ng-show="coursesToday.length>0">
                 <div class="table-responsive">
-                    <table class="table table-bordered table-hover">
+                   <table style="width:100%;text-align:left;background-color:#f0f0f5;" class="table table-bordered table-hover" >
                         <tr>
                             <th>Course Name</th>
                             <th>Start</th>
                             <th>End</th>
                             <th>Maximum Participants</th>
                             <th>Place</th>
+                            <th>number of participant</th>
+
                             <th>Reservation</th>
+
                         </tr>
-                        <tr ng-repeat="course in coursesToday">
-                            <td>{{course.course_name}}</td>
+                        <tr ng-repeat-start="course in coursesToday"   >
+                            <td > <a href="#" ng-click="isClicked = !isClicked">{{course.course_name}}</a></td>
                             <td>{{course.start_datetime}}</td>
                             <td>{{course.end_datetime}}</td>
                             <td>{{course.max_number_of_participants}}</td>
                             <td>{{course.address.place}}</td>
-                            <td><a href="reservation/{{course._id}}">Reserve place</a></td>
+                            <td>{{course.number_of_participants}}</td>
+
+                            <td><a href="reservation/{{course._id}}"  ng-click="disabled(course)" ng-class="{disabled: IsReached(course)}" >Reserve place</a></td>
                         </tr>
 
-                    </table>
+                   <tr collapse="isClicked" ng-repeat-end="">
+            <td colspan="7">
+              <p>some details about {{course.course_name}} </p>
+            </td>
+          </tr>
                 </div>
             </div>
             <div ng-show="coursesToday.length==0" class="ng-hide">
@@ -140,24 +170,34 @@
             <h2>Happening this week</h2>
             <div ng-show="coursesWeek.length>0">
                 <div class="table-responsive">
-                    <table class="table table-bordered table-hover">
+                    <table style="width:100%;text-align:left;background-color:#f0f0f5;" class="table table-bordered table-hover" >
                         <tr>
                             <th>Course Name</th>
                             <th>Start</th>
                             <th>End</th>
                             <th>Maximum Participants</th>
                             <th>Place</th>
+                            <th>number of participant</th>
+
                             <th>Reservation</th>
+
                         </tr>
-                        <tr ng-repeat="course in coursesWeek">
-                            <td>{{course.course_name}}</td>
+                        <tr ng-repeat-start="course in coursesWeek"   >
+                            <td > <a href="#" ng-click="isClicked = !isClicked">{{course.course_name}}</a></td>
                             <td>{{course.start_datetime}}</td>
                             <td>{{course.end_datetime}}</td>
                             <td>{{course.max_number_of_participants}}</td>
                             <td>{{course.address.place}}</td>
-                            <td><a href="reservation/{{course._id}}">Reserve place</a></td>
+                            <td>{{course.number_of_participants}}</td>
+
+                            <td><a href="reservation/{{course._id}}"  ng-click="disabled(course)" ng-class="{disabled: IsReached(course)}" >Reserve place</a></td>
                         </tr>
 
+                   <tr collapse="isClicked" ng-repeat-end="">
+            <td colspan="7">
+              <p>some details about {{course.course_name}} </p>
+            </td>
+          </tr>
                     </table>
                 </div>
             </div>
