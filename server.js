@@ -4,6 +4,7 @@ var app            = express();
 var mongoose       = require('mongoose');
 var bodyParser     = require('body-parser');
 var methodOverride = require('method-override');
+var nodemailer     = require('nodemailer');
 
 // configuration ===========================================
 	
@@ -29,6 +30,7 @@ db.once('open', function() {
 });
 
 // get all data/stuff of the body (POST) parameters
+// body-parser middleware
 app.use(bodyParser.json()); // parse application/json 
 app.use(bodyParser.json({ type: 'application/vnd.api+json' })); // parse application/vnd.api+json as json
 app.use(bodyParser.urlencoded({ extended: true })); // parse application/x-www-form-urlencoded

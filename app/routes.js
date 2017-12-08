@@ -119,6 +119,8 @@ module.exports = function (app) {
         });
     });
 
+    // route to handle creating goes here (app.post)
+
     app.post('/api/searchCourses', function (req, res) {
         // use mongoose to search for courses in the database
         Course.find({course_name: new RegExp(req.body.course_name, "i")}, function (err, courses) {
@@ -157,7 +159,56 @@ module.exports = function (app) {
         });
     });
 
-    // route to handle creating goes here (app.post)
+    app.post('/send', (req, res) => {
+        var output = `
+        <p>A new contact request from UniSport</p>
+        <h3>Contact Details</h3>
+        <ul>
+            <li> FirstName: ${req.body.first-name}</li>
+            <li> LastName: ${req.body.last-name}</li>
+            <li> Email: ${req.body.email}</li>
+        </ul>
+        <h3>Message</h3>
+        <p>${req.body.message}</p>
+        `;
+
+        // create reusable transporter object using the default SMTP transport
+        let transporter = nodemailer.createTransport({
+            host: 'smtp.gmail.com',
+            port: 587,
+            secure: false, // true for 465, false for other ports
+            auth: {
+                user: 'unisport.benefr@gmail.com',
+                pass: 'mouadjoelvictor321'
+            },
+            tls:{
+                rejectUnauthorized: false
+            }
+        });
+
+        // setup email data with unicode symbols
+        let mailOptions = {
+            from: '"UniSport Contact Service" <unisport.benefr@gmail.com>', // sender address
+            to: 'victor.hutse@unifr.ch', // list of receivers
+            subject: 'Unisport Contact', // Subject line
+            text: 'Hello world?', // plain text body
+            html: output // html body
+        };
+
+        // send mail with defined transport object
+        transporter.sendMail(mailOptions, (error, info) => {
+            if (error) {
+                return console.log(error);
+            }
+            console.log('Message sent: %s', info.messageId);
+
+        console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
+
+        res.render('../public/views/contact', {msg: 'Email has been sent'})
+
+        });
+    });
+
     // route to handle delete goes here (app.delete)
 
     // frontend routes =========================================================
