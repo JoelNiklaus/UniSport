@@ -83,15 +83,15 @@ module.exports = function (app) {
                 }
             }
             );
-        
-    
+
+
   }
 });
 
-   
 
 
-    
+
+
     });
 
 
@@ -159,13 +159,65 @@ module.exports = function (app) {
         });
     });
 
+    app.post('/send', function (req, res) {
+        var output = `
+        <p>A new contact request from UniSport</p>
+        <h3>Contact Details</h3>
+        <ul>
+            <li> Name: ${req.body.name}</li>
+            <li> Email: ${req.body.email}</li>
+        </ul>
+        <h3>Message</h3>
+        <p>${req.body.message}</p>
+        `
+        ;
+
+        // create reusable transporter object using the default SMTP transport
+        var transporter = nodemailer.createTransport({
+            host: 'smtp.gmail.com',
+            port: 587,
+            secure: false, // true for 465, false for other ports
+            auth: {
+                user: 'unisport.benefr@gmail.com',
+                pass: 'mouadjoelvictor321'
+            },
+            tls:{
+                rejectUnauthorized: false
+            }
+        });
+
+        // setup email data with unicode symbols
+        var mailOptions = {
+            from: '"UniSport Contact Service" <unisport.benefr@gmail.com>', // sender address
+            to: 'victor.hutse@unifr.ch', // list of receivers
+            subject: 'UniSport Contact', // Subject line
+            text: 'Hello world?', // plain text body
+            html: output // html body
+        };
+
+        // send mail with defined transport object
+        transporter.sendMail(mailOptions, function(error, info) {
+            if(error){
+                return false;
+            }
+            else{
+                console.log('Message sent: ' + info.response);
+                return true;
+            }
+        });
+
+        res.send({"Msg":"Your message has been sent."})
+
+    });
+
+    /**
     app.post('/send', (req, res) => {
         var output = `
         <p>A new contact request from UniSport</p>
         <h3>Contact Details</h3>
         <ul>
-            <li> FirstName: ${req.body.first-name}</li>
-            <li> LastName: ${req.body.last-name}</li>
+            <li> FirstName: ${req.body.firstName}</li>
+            <li> LastName: ${req.body.lastName}</li>
             <li> Email: ${req.body.email}</li>
         </ul>
         <h3>Message</h3>
@@ -204,10 +256,12 @@ module.exports = function (app) {
 
         console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
 
-        res.render('../public/views/contact', {msg: 'Email has been sent'})
+        res.send({msg: 'Email has been sent'});
 
         });
     });
+
+     */
 
     // route to handle delete goes here (app.delete)
 

@@ -8,6 +8,10 @@ body { padding-top:30px; }
 
 }
 
+input.ng-touched.ng-invalid, textarea.ng-touched.ng-invalid {
+    border: 2px solid red;
+}
+
 
 
 
@@ -31,6 +35,7 @@ div {
     
     
     background-color:#f0f0f5;
+
 
 }
 
