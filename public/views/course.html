@@ -21,8 +21,9 @@
     <div class="row">
         <div class="container">
             <div ng-show="searchCoursesResult.length>0">
-                <div class="table-responsive" >
-                    <table style="width:100%;text-align:left;background-color:#f0f0f5;" class="table table-bordered table-hover" >
+                <div class="table-responsive">
+                    <table style="width:100%;text-align:left;background-color:#f0f0f5;"
+                           class="table table-bordered table-hover">
                         <tr>
                             <th>Course Name</th>
                             <th>Start</th>
@@ -34,22 +35,40 @@
                             <th>Reservation</th>
 
                         </tr>
-                        <tr ng-repeat-start="course in searchCoursesResult"   >
-                            <td > <a href="#" ng-click="isClicked = !isClicked">{{course.course_name}}</a></td>
+                        <tr ng-repeat-start="course in searchCoursesResult">
+                            <td><a href="#" ng-click="isClicked = !isClicked">{{course.course_name}}</a></td>
                             <td>{{course.start_datetime}}</td>
                             <td>{{course.end_datetime}}</td>
                             <td>{{course.max_number_of_participants}}</td>
                             <td>{{course.address.place}}</td>
                             <td>{{course.number_of_participants}}</td>
 
-                            <td><a href="reservation/{{course._id}}"  ng-click="disabled(course)" ng-class="{disabled: IsReached(course)}" >Reserve place</a></td>
+                            <td><a href="reservation/{{course._id}}" ng-click="disabled(course)"
+                                   ng-class="{disabled: IsReached(course)}">Reserve place</a></td>
                         </tr>
 
-                   <tr collapse="isClicked" ng-repeat-end="">
-            <td colspan="7">
-              <p>some details about {{course.course_name}} </p>
-            </td>
-          </tr>
+                        <tr collapse="isClicked" ng-repeat-end="">
+                            <td colspan="7">
+                                <div class="row">
+                                    <div class="col-sm-5">
+                                        <h4>Some details about {{course.course_name}} </h4>
+                                        <p>Detail 1</p>
+                                        <p>Detail 2</p>
+                                        <p>Detail 3</p>
+                                    </div>
+                                    <div class="col-sm-7">
+                                        <h4>Location</h4>
+                                        <iframe
+                                                width="100%"
+                                                height="300px"
+                                                frameborder="0" style="border:0"
+                                                src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBYGXHspDs73fWRLL45H7rLANJnbCg6-qk&q=Sidlerstrasse+5,Bern+Switzerland"
+                                                allowfullscreen>
+                                        </iframe>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
 
                     </table>
                 </div>
@@ -62,7 +81,7 @@
 
         </div>
     </div>
-<hr>
+    <hr>
     <div class="row">
         <div class="container">
             <h2>Date Search</h2>
@@ -81,7 +100,8 @@
 
             <div ng-show="searchCoursesResult.length>0">
                 <div class="table-responsive">
-                   <table style="width:100%;text-align:left;background-color:#f0f0f5;" class="table table-bordered table-hover" >
+                    <table style="width:100%;text-align:left;background-color:#f0f0f5;"
+                           class="table table-bordered table-hover">
                         <tr>
                             <th>Course Name</th>
                             <th>Start</th>
@@ -93,22 +113,23 @@
                             <th>Reservation</th>
 
                         </tr>
-                        <tr ng-repeat-start="course in searchCoursesResult"   >
-                            <td > <a href="#" ng-click="isClicked = !isClicked">{{course.course_name}}</a></td>
+                        <tr ng-repeat-start="course in searchCoursesResult">
+                            <td><a href="#" ng-click="isClicked = !isClicked">{{course.course_name}}</a></td>
                             <td>{{course.start_datetime}}</td>
                             <td>{{course.end_datetime}}</td>
                             <td>{{course.max_number_of_participants}}</td>
                             <td>{{course.address.place}}</td>
                             <td>{{course.number_of_participants}}</td>
 
-                            <td><a href="reservation/{{course._id}}"  ng-click="disabled(course)" ng-class="{disabled: IsReached(course)}" >Reserve place</a></td>
+                            <td><a href="reservation/{{course._id}}" ng-click="disabled(course)"
+                                   ng-class="{disabled: IsReached(course)}">Reserve place</a></td>
                         </tr>
 
-                   <tr collapse="isClicked" ng-repeat-end="">
-            <td colspan="7">
-              <p>some details about {{course.course_name}} </p>
-            </td>
-          </tr>
+                        <tr collapse="isClicked" ng-repeat-end="">
+                            <td colspan="7">
+                                <p>some details about {{course.course_name}} </p>
+                            </td>
+                        </tr>
                     </table>
                 </div>
             </div>
@@ -127,7 +148,8 @@
             <h2>Happening today</h2>
             <div ng-show="coursesToday.length>0">
                 <div class="table-responsive">
-                   <table style="width:100%;text-align:left;background-color:#f0f0f5;" class="table table-bordered table-hover" >
+                    <table style="width:100%;text-align:left;background-color:#f0f0f5;"
+                           class="table table-bordered table-hover">
                         <tr>
                             <th>Course Name</th>
                             <th>Start</th>
@@ -139,22 +161,23 @@
                             <th>Reservation</th>
 
                         </tr>
-                        <tr ng-repeat-start="course in coursesToday"   >
-                            <td > <a href="#" ng-click="isClicked = !isClicked">{{course.course_name}}</a></td>
+                        <tr ng-repeat-start="course in coursesToday">
+                            <td><a href="#" ng-click="isClicked = !isClicked">{{course.course_name}}</a></td>
                             <td>{{course.start_datetime}}</td>
                             <td>{{course.end_datetime}}</td>
                             <td>{{course.max_number_of_participants}}</td>
                             <td>{{course.address.place}}</td>
                             <td>{{course.number_of_participants}}</td>
 
-                            <td><a href="reservation/{{course._id}}"  ng-click="disabled(course)" ng-class="{disabled: IsReached(course)}" >Reserve place</a></td>
+                            <td><a href="reservation/{{course._id}}" ng-click="disabled(course)"
+                                   ng-class="{disabled: IsReached(course)}">Reserve place</a></td>
                         </tr>
 
-                   <tr collapse="isClicked" ng-repeat-end="">
-            <td colspan="7">
-              <p>some details about {{course.course_name}} </p>
-            </td>
-          </tr>
+                        <tr collapse="isClicked" ng-repeat-end="">
+                            <td colspan="7">
+                                <p>some details about {{course.course_name}} </p>
+                            </td>
+                        </tr>
                 </div>
             </div>
             <div ng-show="coursesToday.length==0" class="ng-hide">
@@ -170,7 +193,8 @@
             <h2>Happening this week</h2>
             <div ng-show="coursesWeek.length>0">
                 <div class="table-responsive">
-                    <table style="width:100%;text-align:left;background-color:#f0f0f5;" class="table table-bordered table-hover" >
+                    <table style="width:100%;text-align:left;background-color:#f0f0f5;"
+                           class="table table-bordered table-hover">
                         <tr>
                             <th>Course Name</th>
                             <th>Start</th>
@@ -182,22 +206,23 @@
                             <th>Reservation</th>
 
                         </tr>
-                        <tr ng-repeat-start="course in coursesWeek"   >
-                            <td > <a href="#" ng-click="isClicked = !isClicked">{{course.course_name}}</a></td>
+                        <tr ng-repeat-start="course in coursesWeek">
+                            <td><a href="#" ng-click="isClicked = !isClicked">{{course.course_name}}</a></td>
                             <td>{{course.start_datetime}}</td>
                             <td>{{course.end_datetime}}</td>
                             <td>{{course.max_number_of_participants}}</td>
                             <td>{{course.address.place}}</td>
                             <td>{{course.number_of_participants}}</td>
 
-                            <td><a href="reservation/{{course._id}}"  ng-click="disabled(course)" ng-class="{disabled: IsReached(course)}" >Reserve place</a></td>
+                            <td><a href="reservation/{{course._id}}" ng-click="disabled(course)"
+                                   ng-class="{disabled: IsReached(course)}">Reserve place</a></td>
                         </tr>
 
-                   <tr collapse="isClicked" ng-repeat-end="">
-            <td colspan="7">
-              <p>some details about {{course.course_name}} </p>
-            </td>
-          </tr>
+                        <tr collapse="isClicked" ng-repeat-end="">
+                            <td colspan="7">
+                                <p>some details about {{course.course_name}} </p>
+                            </td>
+                        </tr>
                     </table>
                 </div>
             </div>
