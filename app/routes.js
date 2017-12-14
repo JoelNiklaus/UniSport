@@ -2,6 +2,7 @@
 const Course = require('./models/Course');
 const Reservation = require('./models/Reservation');
 var verifier = require('email-verify');
+const nodemailer = require('nodemailer');
 
 module.exports = function (app) {
 
@@ -160,16 +161,15 @@ module.exports = function (app) {
     });
 
     app.post('/send', function (req, res) {
-        var output = `
-        <p>A new contact request from UniSport</p>
-        <h3>Contact Details</h3>
-        <ul>
-            <li> Name: ${req.body.name}</li>
-            <li> Email: ${req.body.email}</li>
-        </ul>
-        <h3>Message</h3>
-        <p>${req.body.message}</p>
-        `
+        var output =
+        "<p>A new contact request from UniSport</p>" +
+        "<h3>Contact Details</h3>" +
+        "<ul>" +
+            "<li> Name: " + req.body.name + "</li>" +
+            "<li> Email: " + req.body.email + "</li>" +
+        "</ul>" +
+        "<h3>Message</h3>" +
+        "<p>" + req.body.message + "</p>"
         ;
 
         // create reusable transporter object using the default SMTP transport
@@ -205,8 +205,6 @@ module.exports = function (app) {
                 return true;
             }
         });
-
-        res.send({"Msg":"Your message has been sent."})
 
     });
 

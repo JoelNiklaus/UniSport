@@ -9,7 +9,7 @@ body { padding-top:30px; }
 }
 
 input.ng-touched.ng-invalid, textarea.ng-touched.ng-invalid {
-    border: 2px solid red;
+    border: 1px solid red;
 }
 
 
