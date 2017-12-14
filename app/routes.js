@@ -114,14 +114,13 @@ module.exports = function (app) {
             // nothing after res.send(err) will execute
             if (err)
                 res.send(err);
-
             res.json(courses); // return all courses in JSON format
         });
     });
 
     app.post('/api/searchCourses', function (req, res) {
         // use mongoose to search for courses in the database
-        Course.find({course_name: new RegExp(req.body.course_name, "i")}, function (err, courses) {
+        Course.find({sport: new RegExp(req.body.sport, "i")}, function (err, courses) {
             // if there is an error retrieving, send the error.
             // nothing after res.send(err) will execute
        
@@ -129,7 +128,8 @@ module.exports = function (app) {
             if (err)
                 res.send(err);
 
-            
+                    console.log(courses);
+
             res.json(courses); // return all courses in JSON format
         });
     });
@@ -140,20 +140,37 @@ module.exports = function (app) {
         
 
     app.post('/api/getCoursesByDateRange', function (req, res) {
+        console.log(req.body);
+        var j,k;
+        var rdate = req.body.date;
+        var altable;
+        var tab;
+        var result=[];
         // use mongoose to search for courses in the database
         // TODO perhaps modify this (include end_datetime) if we have courses spanning over multiple days
-        Course.find({
-            start_datetime: {
-                $gte: req.body.start_datetime,
-                $lt: req.body.end_datetime
-            }
+        Course.find({ 
         }, function (err, courses) {
             // if there is an error retrieving, send the error.
             // nothing after res.send(err) will execute
             if (err)
                 res.send(err);
+            for(j=0;j<courses.length;j++){
+                    altable=courses[j].dates;
+                    for(k=0;k<altable.length;k++){
 
-            res.json(courses); // return all courses in JSON format
+ tab = ""+altable[k];
+                        var n = tab.indexOf(""+rdate);
+              if(n!=-1) {
+ result.push(courses[j]);
+                break;
+              }
+
+                    }
+                                               
+            }
+
+
+            res.json(result); // return all courses in JSON format
         });
     });
 
