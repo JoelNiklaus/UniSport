@@ -13,6 +13,7 @@
     "express": "~4.5.1",
     "method-override": "~2.0.2",
     "mongoose": "^4.13.5",
+    "ng-table": "^3.0.1",
     "nodemon": "^1.12.1"
   },
   "scripts": {
