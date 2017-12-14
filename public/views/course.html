@@ -65,7 +65,7 @@
     <div class="row">
         <div class="container">
             <h2>Date Search</h2>
-            
+
             <form>
                 <!-- TODO Mouad: Ca ne foncionne pas. Tu sais pourquoi? le model n'est pas trouvé-->
                 <div class="input-group input-group-lg">
@@ -170,11 +170,10 @@
             <h2>Happening this week</h2>
             <div ng-show="coursesWeek.length>0">
                 <div class="table-responsive">
-                    <table style="width:100%;text-align:left;background-color:#f0f0f5;" class="table table-bordered table-hover" >
+                    <table style="width:100%;text-align:left;background-color:#f0f0f5;" class="table table-bordered table-hover" ng-table ="weektable"  class="table" show-filter="true" >
                         <tr>
                             <th>Course Name</th>
-                            <th>Start</th>
-                            <th>End</th>
+                            <th>time</th>
                             <th>Maximum Participants</th>
                             <th>Place</th>
                             <th>number of participant</th>
@@ -182,12 +181,11 @@
                             <th>Reservation</th>
 
                         </tr>
-                        <tr ng-repeat-start="course in coursesWeek"   >
-                            <td > <a href="#" ng-click="isClicked = !isClicked">{{course.course_name}}</a></td>
-                            <td>{{course.start_datetime}}</td>
-                            <td>{{course.end_datetime}}</td>
+                        <tr ng-repeat-start="course in $data " >
+                            <td > <a href="#" ng-click="isClicked = !isClicked">{{course.sport}}</a></td>
+                            <td>{{course.times}}</td>                 
                             <td>{{course.max_number_of_participants}}</td>
-                            <td>{{course.address.place}}</td>
+                            <td>{{course.place}}</td>
                             <td>{{course.number_of_participants}}</td>
 
                             <td><a href="reservation/{{course._id}}"  ng-click="disabled(course)" ng-class="{disabled: IsReached(course)}" >Reserve place</a></td>
@@ -195,7 +193,7 @@
 
                    <tr collapse="isClicked" ng-repeat-end="">
             <td colspan="7">
-              <p>some details about {{course.course_name}} </p>
+              <p>some details about {{course.description}} </p>
             </td>
           </tr>
                     </table>

@@ -59,11 +59,12 @@ angular.module('CourseCtrl', []).controller('CourseController', function ($scope
 
 
     function getCoursesToday() {
+        var r = [];
 
         var req = new XMLHttpRequest();
         var date =new Date();
-        var e = date.getDate()+"."+date.getMonth()+"."+date.getFullYear();
-        console.log(e);
+               var e = date.getDate()+"."+date.getMonth()+"."+date.getFullYear();
+
         // Fetch today's Courses
         req.date = e; // today
        
@@ -85,15 +86,31 @@ angular.module('CourseCtrl', []).controller('CourseController', function ($scope
     }
 
     function getCoursesWeek() {
-        var req = new XMLHttpRequest();
-        // Fetch today's Courses
-        req.start_datetime = new Date(); // today
-        var nextWeek = new Date();
-        nextWeek.setDate(new Date().getDate() + 7); // next week
-        req.end_datetime = nextWeek;
+                var r = [];
 
-        $http.post('/api/getCoursesByDateRange', req).then(function (res) {
+        var req = new XMLHttpRequest();
+        var date =new Date();
+        var e = date.getDate()+"."+date.getMonth()+"."+date.getFullYear();
+        for(var j=0;j<7;j++){
+
+            r.push((date.getDate()+j)+"."+date.getMonth()+"."+date.getFullYear());
+        }
+        console.log(r);
+        // Fetch today's Courses
+        req.date = e; // today
+        req.week=r;
+       // nextWeek.setDate(new Date().getDate() + 7); // next week
+
+        $http.post('/api/getCourseOfWeek', req).then(function (res) {
             $scope.coursesWeek = res.data;
+              $scope.weektable = new NgTableParams({
+    page: 1,
+    count: 5
+  }, {
+    counts: [],
+    total: res.data.length,
+    dataset: res.data
+  });
         }).catch(function (err) {
             console.error(err);
         });
