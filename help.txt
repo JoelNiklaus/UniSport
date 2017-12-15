@@ -21,5 +21,8 @@ Example Database Queries:
 db.courses.find({"course_name": "Floorball"})
 db.reservations.find({"participants.firstname":"Wladimir"})
 
+db.fribourgcourses.update({},{ $set:{"max_number_of_participants": 20}}, {upsert:false, multi:true})
+db.fribourgcourses.update({},{ $set:{"number_of_participants": 0}}, {upsert:false, multi:true})
+
 For automatic server reload:
 npm install -g nodemon
