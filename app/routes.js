@@ -165,11 +165,11 @@ module.exports = function (app) {
         "<p>A new contact request from UniSport</p>" +
         "<h3>Contact Details</h3>" +
         "<ul>" +
-            "<li> Name: " + req.body.name + "</li>" +
-            "<li> Email: " + req.body.email + "</li>" +
+            "<li> Name: " + req.body.name.$viewValue + "</li>" +
+            "<li> Email: " + req.body.email.$viewValue + "</li>" +
         "</ul>" +
         "<h3>Message</h3>" +
-        "<p>" + req.body.message + "</p>"
+        "<p>" + req.body.message.$viewValue + "</p>"
         ;
 
         // create reusable transporter object using the default SMTP transport

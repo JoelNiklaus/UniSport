@@ -8,7 +8,6 @@ angular.module('ContactCtrl', []).controller('ContactController', function($scop
 
 	    if (contactForm.$valid) {
 	        var newFormData = angular.copy(contactForm);
-	        console.log("This is the formData: " + newFormData);
 
             $http.post('/send', newFormData).then(function(response) {
 
