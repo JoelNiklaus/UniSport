@@ -114,14 +114,13 @@ module.exports = function (app) {
             // nothing after res.send(err) will execute
             if (err)
                 res.send(err);
-
             res.json(courses); // return all courses in JSON format
         });
     });
 
     app.post('/api/searchCourses', function (req, res) {
         // use mongoose to search for courses in the database
-        Course.find({course_name: new RegExp(req.body.course_name, "i")}, function (err, courses) {
+        Course.find({sport: new RegExp(req.body.sport, "i")}, function (err, courses) {
             // if there is an error retrieving, send the error.
             // nothing after res.send(err) will execute
        
@@ -129,31 +128,85 @@ module.exports = function (app) {
             if (err)
                 res.send(err);
 
-            
+                    console.log(courses);
+
             res.json(courses); // return all courses in JSON format
         });
     });
 
    
  
-
         
 
     app.post('/api/getCoursesByDateRange', function (req, res) {
+         var date = new Date();
+        
+        var j,k;
+        var rdate = req.body.date;
+        var altable;
+        var tab;
+        var result=[];
         // use mongoose to search for courses in the database
         // TODO perhaps modify this (include end_datetime) if we have courses spanning over multiple days
-        Course.find({
-            start_datetime: {
-                $gte: req.body.start_datetime,
-                $lt: req.body.end_datetime
-            }
+        Course.find({ 
         }, function (err, courses) {
             // if there is an error retrieving, send the error.
             // nothing after res.send(err) will execute
             if (err)
                 res.send(err);
+            for(j=0;j<courses.length;j++){
+                    altable=courses[j].dates;
+                    for(k=0;k<altable.length;k++){
 
-            res.json(courses); // return all courses in JSON format
+ tab = ""+altable[k];
+                        var n = tab.indexOf(""+rdate);
+              if( n!=-1) {
+ result.push(courses[j]);
+                break;
+              }
+
+                    }
+                                               
+            }
+
+
+            res.json(result); // return all courses in JSON format
+        });
+    });
+
+    app.post('/api/getCourseOfWeek', function (req, res) {
+         var date = new Date();
+         var week =req.body.week;
+        var j,k;
+        var rdate = req.body.date;
+        var altable;
+        var tab;
+        var result=[];
+        // use mongoose to search for courses in the database
+        // TODO perhaps modify this (include end_datetime) if we have courses spanning over multiple days
+        Course.find({ 
+        }, function (err, courses) {
+            // if there is an error retrieving, send the error.
+            // nothing after res.send(err) will execute
+            if (err)
+                res.send(err);
+            for(j=0;j<courses.length;j++){
+                    altable=courses[j].dates;
+                    for(k=0;k<altable.length;k++){
+
+ tab = ""+altable[k];
+                        var n = tab.indexOf(""+rdate);
+              if( tab.indexOf(""+week[0])!=-1 || tab.indexOf(""+week[1])!=-1  ||   tab.indexOf(""+week[2])!=-1  ||  tab.indexOf(""+week[3])!=-1    || tab.indexOf(""+week[4])!=-1     ||  tab.indexOf(""+week[5])!=-1    || tab.indexOf(""+week[6])!=-1    ||  tab.indexOf(""+week[7])!=-1) {
+ result.push(courses[j]);
+                break;
+              }
+
+                    }
+                                               
+            }
+
+
+            res.json(result); // return all courses in JSON format
         });
     });
 

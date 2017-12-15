@@ -6,8 +6,9 @@ datePicker.directive('jqdatepicker', function () {
         require: 'ngModel',
         link: function (scope, element, attrs, ngModelCtrl) {
             $(element).datepicker({
-                //dateFormat: 'DD, d  MM, yy',
+                dateFormat: 'dd.mm.yy',
                 onSelect: function (date) {
+                     scope.dateSearch.date=date;
                     scope.date = date;
                     scope.$apply();
                 },
@@ -16,4 +17,5 @@ datePicker.directive('jqdatepicker', function () {
             });
         }
     };
+
 });

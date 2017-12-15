@@ -6,7 +6,7 @@
 
         <div class="input-group input-group-lg">
             <span class="input-group-addon glyphicon glyphicon-search" id="sizing-addon1" aria-hidden="true"></span>
-            <input type="text" class="form-control" ng-model="formData.course_name" ng-change="searchCourses(formData)"
+            <input type="text" class="form-control" ng-model="formData.sport" ng-change="searchCourses(formData)"
                    placeholder="Search for Course Name" aria-describedby="sizing-addon1">
         </div>
 
@@ -21,13 +21,13 @@
     <div class="row">
         <div class="container">
             <div ng-show="searchCoursesResult.length>0">
-                <div class="table-responsive">
+                <div class="table-responsive table table-striped table-hover table-bordered">
                     <table style="width:100%;text-align:left;background-color:#f0f0f5;"
-                           class="table table-bordered table-hover">
+                           class="table table-bordered table-hover" ng-table="usersTable" class="table"
+                           show-filter="true">
                         <tr>
                             <th>Course Name</th>
-                            <th>Start</th>
-                            <th>End</th>
+                            <th>time</th>
                             <th>Maximum Participants</th>
                             <th>Place</th>
                             <th>number of participant</th>
@@ -35,12 +35,11 @@
                             <th>Reservation</th>
 
                         </tr>
-                        <tr ng-repeat-start="course in searchCoursesResult">
-                            <td><a href="#" ng-click="isClicked = !isClicked">{{course.course_name}}</a></td>
-                            <td>{{course.start_datetime}}</td>
-                            <td>{{course.end_datetime}}</td>
+                        <tr ng-repeat-start="course in $data ">
+                            <td><a href="#" ng-click="isClicked = !isClicked">{{course.sport}}</a></td>
+                            <td>{{course.times}}</td>
                             <td>{{course.max_number_of_participants}}</td>
-                            <td>{{course.address.place}}</td>
+                            <td>{{course.place}}</td>
                             <td>{{course.number_of_participants}}</td>
 
                             <td><a href="reservation/{{course._id}}" ng-click="disabled(course)"
@@ -51,10 +50,8 @@
                             <td colspan="7">
                                 <div class="row">
                                     <div class="col-sm-5">
-                                        <h4>Some details about {{course.course_name}} </h4>
-                                        <p>Detail 1</p>
-                                        <p>Detail 2</p>
-                                        <p>Detail 3</p>
+                                        <h4>Some details about {{course.sport}}</h4>
+                                        <p>{{course.description}}</p>
                                     </div>
                                     <div class="col-sm-7">
                                         <h4>Location</h4>
@@ -69,13 +66,13 @@
                                 </div>
                             </td>
                         </tr>
-
                     </table>
+
                 </div>
             </div>
             <div ng-show="searchCoursesResult.length==0" class="ng-hide">
                 <div class="alert alert-danger" role="alert">
-                    <strong>Damn it!</strong> No courses found with course name "{{formData.course_name}}"
+                    <strong>Damn it!</strong> No courses found with course name "{{formData.sport}}"
                 </div>
             </div>
 
@@ -85,11 +82,14 @@
     <div class="row">
         <div class="container">
             <h2>Date Search</h2>
+
             <form>
                 <!-- TODO Mouad: Ca ne foncionne pas. Tu sais pourquoi? le model n'est pas trouvé-->
                 <div class="input-group input-group-lg">
-                    <input type="text" class="form-control" ng-model="dateSearch.start_datetime"
-                           placeholder="Search for a specific date" aria-describedby="sizing-addon2" jqdatepicker>
+
+                    <input type="text" class="form-control" ng-model="dateSearch.date"
+                           placeholder="Search for a specific date in this format dd.mm.yy"
+                           aria-describedby="sizing-addon2" jqdatepicker>
                     <span class="input-group-btn" id="sizing-addon2" aria-hidden="true">
                         <button type="button" class="btn btn-primary" ng-click="getCoursesByDateRange(dateSearch)">
                             <span class="glyphicon glyphicon-search"> Search</span>
@@ -98,14 +98,16 @@
                 </div>
             </form>
 
+
             <div ng-show="searchCoursesResult.length>0">
                 <div class="table-responsive">
+
                     <table style="width:100%;text-align:left;background-color:#f0f0f5;"
-                           class="table table-bordered table-hover">
+                           class="table table-bordered table-hover" ng-table="usersTables" class="table"
+                           show-filter="true">
                         <tr>
                             <th>Course Name</th>
-                            <th>Start</th>
-                            <th>End</th>
+                            <th>time</th>
                             <th>Maximum Participants</th>
                             <th>Place</th>
                             <th>number of participant</th>
@@ -113,12 +115,11 @@
                             <th>Reservation</th>
 
                         </tr>
-                        <tr ng-repeat-start="course in searchCoursesResult">
-                            <td><a href="#" ng-click="isClicked = !isClicked">{{course.course_name}}</a></td>
-                            <td>{{course.start_datetime}}</td>
-                            <td>{{course.end_datetime}}</td>
+                        <tr ng-repeat-start="course in $data ">
+                            <td><a href="#" ng-click="isClicked = !isClicked">{{course.sport}}</a></td>
+                            <td>{{course.times}}</td>
                             <td>{{course.max_number_of_participants}}</td>
-                            <td>{{course.address.place}}</td>
+                            <td>{{course.place}}</td>
                             <td>{{course.number_of_participants}}</td>
 
                             <td><a href="reservation/{{course._id}}" ng-click="disabled(course)"
@@ -127,7 +128,7 @@
 
                         <tr collapse="isClicked" ng-repeat-end="">
                             <td colspan="7">
-                                <p>some details about {{course.course_name}} </p>
+                                <p>some details about {{course.description}} </p>
                             </td>
                         </tr>
                     </table>
@@ -148,12 +149,13 @@
             <h2>Happening today</h2>
             <div ng-show="coursesToday.length>0">
                 <div class="table-responsive">
+
                     <table style="width:100%;text-align:left;background-color:#f0f0f5;"
-                           class="table table-bordered table-hover">
+                           class="table table-bordered table-hover" ng-table="todayTable" class="table"
+                           show-filter="true">
                         <tr>
                             <th>Course Name</th>
-                            <th>Start</th>
-                            <th>End</th>
+                            <th>time</th>
                             <th>Maximum Participants</th>
                             <th>Place</th>
                             <th>number of participant</th>
@@ -161,77 +163,79 @@
                             <th>Reservation</th>
 
                         </tr>
-                        <tr ng-repeat-start="course in coursesToday">
-                            <td><a href="#" ng-click="isClicked = !isClicked">{{course.course_name}}</a></td>
-                            <td>{{course.start_datetime}}</td>
-                            <td>{{course.end_datetime}}</td>
+                        <tr ng-repeat-start="course in $data ">
+                            <td><a href="#" ng-click="isClicked = !isClicked">{{course.sport}}</a></td>
+                            <td>{{course.times}}</td>
                             <td>{{course.max_number_of_participants}}</td>
-                            <td>{{course.address.place}}</td>
+                            <td>{{course.place}}</td>
                             <td>{{course.number_of_participants}}</td>
 
                             <td><a href="reservation/{{course._id}}" ng-click="disabled(course)"
                                    ng-class="{disabled: IsReached(course)}">Reserve place</a></td>
                         </tr>
 
-                        <tr collapse="isClicked" ng-repeat-end="">
-                            <td colspan="7">
-                                <p>some details about {{course.course_name}} </p>
-                            </td>
-                        </tr>
-                </div>
-            </div>
-            <div ng-show="coursesToday.length==0" class="ng-hide">
-                <div class="alert alert-danger" role="alert">
-                    <strong>Damn it!</strong> There are no courses today.
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="container">
-            <h2>Happening this week</h2>
-            <div ng-show="coursesWeek.length>0">
-                <div class="table-responsive">
-                    <table style="width:100%;text-align:left;background-color:#f0f0f5;"
-                           class="table table-bordered table-hover">
-                        <tr>
-                            <th>Course Name</th>
-                            <th>Start</th>
-                            <th>End</th>
-                            <th>Maximum Participants</th>
-                            <th>Place</th>
-                            <th>number of participant</th>
-
-                            <th>Reservation</th>
-
-                        </tr>
-                        <tr ng-repeat-start="course in coursesWeek">
-                            <td><a href="#" ng-click="isClicked = !isClicked">{{course.course_name}}</a></td>
-                            <td>{{course.start_datetime}}</td>
-                            <td>{{course.end_datetime}}</td>
-                            <td>{{course.max_number_of_participants}}</td>
-                            <td>{{course.address.place}}</td>
-                            <td>{{course.number_of_participants}}</td>
-
-                            <td><a href="reservation/{{course._id}}" ng-click="disabled(course)"
-                                   ng-class="{disabled: IsReached(course)}">Reserve place</a></td>
-                        </tr>
 
                         <tr collapse="isClicked" ng-repeat-end="">
                             <td colspan="7">
-                                <p>some details about {{course.course_name}} </p>
+                                <p>some details about {{course.description}} </p>
                             </td>
                         </tr>
+
                     </table>
                 </div>
+                <div ng-show="coursesToday.length==0" class="ng-hide">
+                    <div class="alert alert-danger" role="alert">
+                        <strong>Damn it!</strong> There are no courses today.
+                    </div>
+                </div>
             </div>
-            <div ng-show="coursesWeek.length==0" class="ng-hide">
-                <div class="alert alert-danger" role="alert">
-                    <strong>Damn it!</strong> There are no courses this week.
+        </div>
+
+        <div class="row">
+            <div class="container">
+                <h2>Happening this week</h2>
+                <div ng-show="coursesWeek.length>0">
+                    <div class="table-responsive">
+
+                        <table style="width:100%;text-align:left;background-color:#f0f0f5;"
+                               class="table table-bordered table-hover" ng-table="weektable" class="table"
+                               show-filter="true">
+                            <tr>
+                                <th>Course Name</th>
+                                <th>time</th>
+                                <th>Maximum Participants</th>
+                                <th>Place</th>
+                                <th>number of participant</th>
+
+                                <th>Reservation</th>
+
+                            </tr>
+                            <tr ng-repeat-start="course in $data ">
+                                <td><a href="#" ng-click="isClicked = !isClicked">{{course.sport}}</a></td>
+                                <td>{{course.times}}</td>
+                                <td>{{course.max_number_of_participants}}</td>
+                                <td>{{course.place}}</td>
+                                <td>{{course.number_of_participants}}</td>
+
+                                <td><a href="reservation/{{course._id}}" ng-click="disabled(course)"
+                                       ng-class="{disabled: IsReached(course)}">Reserve place</a></td>
+                            </tr>
+
+
+                            <tr collapse="isClicked" ng-repeat-end="">
+                                <td colspan="7">
+                                    <p>some details about {{course.description}} </p>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <div ng-show="coursesWeek.length==0" class="ng-hide">
+                    <div class="alert alert-danger" role="alert">
+                        <strong>Damn it!</strong> There are no courses this week.
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
