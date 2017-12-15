@@ -1,1 +1,1 @@
-var app = angular.module('UniSport', ['ngTable','ui.bootstrap','ngRoute', 'appRoutes', 'appDirectives', 'MainCtrl', 'CourseCtrl', 'CourseService', 'ReservationCtrl', 'ReservationService', 'AboutUsCtrl', 'AboutUsService']);
+var app = angular.module('UniSport', ['ngTable', 'ui.bootstrap', 'ngRoute', 'appRoutes', 'appDirectives', 'MainCtrl', 'CourseCtrl', 'CourseService', 'ReservationCtrl', 'ReservationService', 'AboutUsCtrl', 'AboutUsService', 'ContactCtrl', 'ContactService', 'FaqCtrl', 'FaqService']);

@@ -18,6 +18,16 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
 			controller: 'AboutUsController'	
 		})
 
+		.when('/faq', {
+			templateUrl: 'views/faq.html',
+			controller: 'FaqController'
+		})
+
+		.when('/contact', {
+			templateUrl: 'views/contact.html',
+			controller: 'ContactController'
+		})
+
 		.when('/reservation/:course_id', {
 			templateUrl: 'views/reservation.html',
 			controller: 'ReservationController'

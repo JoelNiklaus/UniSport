@@ -1,0 +1,76 @@
+<div ng-controller="ContactController">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="jumbotron text-center">
+	            <h1>How can you contact us?</h1>
+
+	            <p>{{ tagline }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <p><h3>These are the people who will answer your questions:</h3></p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="thumbnail">
+                <img src="../../images/JoelNiklaus.png" class="img-responsive" style="width:50%" id="jn">
+                <p class="text-center"><label for="jn">Joël Niklaus</label></p>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="thumbnail">
+                <img src="../../images/MouadKondah.png" class="img-responsive" style="width:50%" id="mk">
+                <p class="text-center"><label for="mk">Mouad Kondah</label></p>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="thumbnail">
+                <img src="../../images/VictorHutse.png" class="img-responsive" style="width:50%" id="vh">
+                <p class="text-center"><label for="vh">Victor Hutse</label></p>
+            </div>
+        </div>
+    </div>
+	<div class="row">
+		<div class="col-xs-12" ng-controller="ContactController">
+			<h3>Fill in this form to send us your remaining questions.</h3>
+			<form name="contactForm">
+				<div class="form-group">
+					<input ng-model="name" type="text" class="form-control" placeholder="Name" id="name" name="name" required/>
+                    <div role="alert">
+                        <span class="error" ng-show="contactForm.name.$invalid && contactForm.name.$touched">Please fill in a valid name</span>
+                    </div>
+                </div>
+				<div class="form-group">
+					<input ng-model="email" type="email" class="form-control" placeholder="E-mail Address" id="email" name="email" required/>
+                    <div role="alert">
+                        <span class="error" ng-show="contactForm.email.$invalid && contactForm.email.$touched">Please fill in a valid e-mail address</span>
+                    </div>
+                </div>
+				<div class="form-group">
+					<textarea ng-model="message" class="form-control" rows="6" placeholder="Your Message" id="message" name="message" required></textarea>
+				</div>
+                <div class="form-group">
+                    <input ng-disabled="contactForm.$invalid" type="submit" ng-click="sendContactForm(contactForm)" id="submit" class="btn btn-default" value="Submit" name="submit" />
+                </div>
+			</form>
+            <div ng-show="danger" class="ng-hide">
+                <div class="alert alert-danger" role="alert">
+                    <strong>Damn it!</strong> {{danger}}
+                </div>
+            </div>
+            <div ng-show="success" class="ng-hide">
+                <div class="alert alert-success" role="alert">
+                    <strong>Hooray!</strong> {{success}}
+                </div>
+            </div>
+		</div>
+	</div>
+</div>
+
+<br/>
+<footer class="col-xs-12">
+    <p class="text-center"><small>&copy; Copyright 2017</small></p>
+</footer>

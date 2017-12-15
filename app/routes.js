@@ -2,6 +2,7 @@
 const Course = require('./models/Course');
 const Reservation = require('./models/Reservation');
 var verifier = require('email-verify');
+const nodemailer = require('nodemailer');
 
 module.exports = function (app) {
 
@@ -83,15 +84,15 @@ module.exports = function (app) {
                 }
             }
             );
-        
-    
+
+
   }
 });
 
-   
 
 
-    
+
+
     });
 
 
@@ -117,6 +118,8 @@ module.exports = function (app) {
             res.json(courses); // return all courses in JSON format
         });
     });
+
+    // route to handle creating goes here (app.post)
 
     app.post('/api/searchCourses', function (req, res) {
         // use mongoose to search for courses in the database
@@ -210,7 +213,56 @@ module.exports = function (app) {
         });
     });
 
-    // route to handle creating goes here (app.post)
+    app.post('/send', function (req, res) {
+        var output =
+        "<p>A new contact request from UniSport</p>" +
+        "<h3>Contact Details</h3>" +
+        "<ul>" +
+            "<li> Name: " + req.body.name.$viewValue + "</li>" +
+            "<li> Email: " + req.body.email.$viewValue + "</li>" +
+        "</ul>" +
+        "<h3>Message</h3>" +
+        "<p>" + req.body.message.$viewValue + "</p>"
+        ;
+
+        // create reusable transporter object using the default SMTP transport
+        var transporter = nodemailer.createTransport({
+            host: 'smtp.gmail.com',
+            port: 587,
+            secure: false, // true for 465, false for other ports
+            auth: {
+                user: 'unisport.benefr@gmail.com',
+                pass: 'mouadjoelvictor321'
+            },
+            tls:{
+                rejectUnauthorized: false
+            }
+        });
+
+
+        // setup email data with unicode symbols
+        var mailOptions = {
+            from: '"UniSport Contact Service" <unisport.benefr@gmail.com>', // sender address
+            to: 'victor.hutse@unifr.ch', // list of receivers
+            subject: 'UniSport Contact', // Subject line
+            text: 'Hello world?', // plain text body
+            html: output // html body
+        };
+
+        // send mail with defined transport object
+        transporter.sendMail(mailOptions, function(error, info) {
+            if(error){
+                res.send(error);
+            }
+            else{
+                res.send('Message sent: ' + info.response);
+
+            }
+        });
+
+    });
+    
+
     // route to handle delete goes here (app.delete)
 
     // frontend routes =========================================================
