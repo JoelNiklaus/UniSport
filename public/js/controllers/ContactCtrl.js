@@ -17,8 +17,8 @@ angular.module('ContactCtrl', []).controller('ContactController', function($scop
 
             }).catch(function(err){
                 console.log(err.data);
-                $scope.danger = "An error occurred. Could not send message: " + err;
-                console.error(err);
+                $scope.danger = "An error occurred. Could not send message: " + err.message;
+                console.error(err.message);
             });
         }
 
