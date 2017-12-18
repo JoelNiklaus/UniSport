@@ -13,14 +13,13 @@ angular.module('ReservationCtrl', []).controller('ReservationController', functi
 
     // TODO perform more client side form validation
     // TODO add captcha once we are deployed on cloud: http://bootstrapaholic.de/tutorials/recaptcha-spam-schutz-fuer-kontaktformular/
-    
-$scope.loading = false ; 
+
+    $scope.loading = false;
 
 
- 
     $scope.makeReservation = function (formData) {
-         $scope.loading = true ; 
-                                        $scope.danger = null;
+        $scope.loading = true;
+        $scope.danger = null;
 
         if (formData.$valid) {
             var newformData = angular.copy(formData);
@@ -28,13 +27,13 @@ $scope.loading = false ;
             newformData.course_id = $scope.course_id;
             $http.post('/api/makeReservation', newformData).then(function (res) {
                 if (res.data.lastname != null) {
-                                        $scope.danger = null;
+                    $scope.danger = null;
 
                     $scope.success = "Successfully reserved a space.";
 
                 }
                 else {
-                             $scope.loading = false ; 
+                    $scope.loading = false;
 
                     console.log(res.data);
                     $scope.danger = "" + res.data;
@@ -42,7 +41,7 @@ $scope.loading = false ;
                 }
 
             }).catch(function (err) {
-         $scope.loading = false ; 
+                $scope.loading = false;
 
                 console.log(err.data);
                 $scope.danger = "An error occurred. Could not reserve a space: " + err;
@@ -51,5 +50,3 @@ $scope.loading = false ;
         }
     }
 });
-
-//

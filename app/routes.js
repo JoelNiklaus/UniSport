@@ -10,87 +10,79 @@ module.exports = function (app) {
     // handle things like api calls
     // authentication routes
 //
-     
+
     app.post('/api/makeReservation', function (req, res, next) {
-        var check=false;   //this check var will tell us if there is a student already registred on the current course
-        var course1 =req.body.course_id ;  
+        var check = false;   //this check var will tell us if there is a student already registred on the current course
+        var course1 = req.body.course_id;
         var n; // variable to store the current number of participants
-                  verifier.verify(req.body.email, function( err, info ){
+        verifier.verify(req.body.email, function (err, info) {
 
 
+            if (err) res.end("email not valid");
+            else {
 
+                Course.findById(req.body.course_id, function (err, course) {
+                    if (err)
+                        res.status(500).send("We need a valid course to make a reservation.");
+                    n = course.number_of_participants; // store the current number here
 
-
-
-  if( err ) res.end("email not valid");
-  else{
-
-         Course.findById(req.body.course_id, function (err, course) {
-            if (err)
-                res.status(500).send("We need a valid course to make a reservation.");
-            n=course.number_of_participants; // store the current number here 
-
-        });
+                });
 //
 //here i go to the reservation db and i check all the mongodb object where i have the current email and surely check if it's the current course
-        Reservation.find({email: new RegExp(req.body.email, "i")}, function (err, reserv) {
-            var j;
-            for(j=0;j<reserv.length;j++){
-                if(reserv[j].course_id==course1) check=true;
+                Reservation.find({email: new RegExp(req.body.email, "i")}, function (err, reserv) {
+                    var j;
+                    for (j = 0; j < reserv.length; j++) {
+                        if (reserv[j].course_id == course1) check = true;
 
-            }
-        });
-
-        Course.findById(req.body.course_id, function (err, course) {
-            if (err)
-                res.status(500).send("We need a valid course to make a reservation.");
-
-        });
-
-        if (!req.body.firstname || !req.body.lastname || !req.body.email)
-            res.status(500).send("We need you to fill out the entire form.");
-
-        // TODO validate, that each email can only be registered once per course!
-
-        new Reservation(req.body).save((err, createdReservation) => {
-                if (!check) {
-                    if (err) {
-                        res.status(500).send(err);
                     }
-                    // This createdReservation is the same one we saved, but after Mongo
-                    // added its additional properties like _id.
-                else{   
+                });
 
-        Course.findById(req.body.course_id, function (err, course) {
-            if (err) handleErro(err);
-                
-            course.number_of_participants=n+1;  //increment the current number
-                course.save((err,todo)=>{//save it 
-                    if(err) console.log(err);
+                Course.findById(req.body.course_id, function (err, course) {
+                    if (err)
+                        res.status(500).send("We need a valid course to make a reservation.");
 
                 });
 
+                if (!req.body.firstname || !req.body.lastname || !req.body.email)
+                    res.status(500).send("We need you to fill out the entire form.");
 
-            } 
+                // TODO validate, that each email can only be registered once per course!
 
-        );
+                new Reservation(req.body).save((err, createdReservation) => {
+                        if (!check) {
+                            if (err) {
+                                res.status(500).send(err);
+                            }
+                            // This createdReservation is the same one we saved, but after Mongo
+                            // added its additional properties like _id.
+                            else {
 
-            
-            
-                    res.status(200).send(createdReservation);
-                    res.end("ok");}
-                } else {
-                    res.send("your are already registered for this course.");
-                }
+                                Course.findById(req.body.course_id, function (err, course) {
+                                        if (err) handleErro(err);
+
+                                        course.number_of_participants = n + 1;  //increment the current number
+                                        course.save((err, todo) => {//save it
+                                            if (err) console.log(err);
+
+                                        });
+
+
+                                    }
+                                );
+
+
+                                res.status(200).send(createdReservation);
+                                res.end("ok");
+                            }
+                        } else {
+                            res.send("your are already registered for this course.");
+                        }
+                    }
+                );
+
+
             }
-            );
-
-
-  }
-});
-
-
-
+        });
 
 
     });
@@ -126,50 +118,46 @@ module.exports = function (app) {
         Course.find({sport: new RegExp(req.body.sport, "i")}, function (err, courses) {
             // if there is an error retrieving, send the error.
             // nothing after res.send(err) will execute
-       
+
 
             if (err)
                 res.send(err);
 
-                    console.log(courses);
+            console.log(courses);
 
             res.json(courses); // return all courses in JSON format
         });
     });
 
-   
- 
-        
 
     app.post('/api/getCoursesByDateRange', function (req, res) {
-         var date = new Date();
-        
-        var j,k;
+        var date = new Date();
+
+        var j, k;
         var rdate = req.body.date;
         var altable;
         var tab;
-        var result=[];
+        var result = [];
         // use mongoose to search for courses in the database
         // TODO perhaps modify this (include end_datetime) if we have courses spanning over multiple days
-        Course.find({ 
-        }, function (err, courses) {
+        Course.find({}, function (err, courses) {
             // if there is an error retrieving, send the error.
             // nothing after res.send(err) will execute
             if (err)
                 res.send(err);
-            for(j=0;j<courses.length;j++){
-                    altable=courses[j].dates;
-                    for(k=0;k<altable.length;k++){
+            for (j = 0; j < courses.length; j++) {
+                altable = courses[j].dates;
+                for (k = 0; k < altable.length; k++) {
 
- tab = ""+altable[k];
-                        var n = tab.indexOf(""+rdate);
-              if( n!=-1) {
- result.push(courses[j]);
-                break;
-              }
-
+                    tab = "" + altable[k];
+                    var n = tab.indexOf("" + rdate);
+                    if (n != -1) {
+                        result.push(courses[j]);
+                        break;
                     }
-                                               
+
+                }
+
             }
 
 
@@ -178,34 +166,33 @@ module.exports = function (app) {
     });
 
     app.post('/api/getCourseOfWeek', function (req, res) {
-         var date = new Date();
-         var week =req.body.week;
-        var j,k;
+        var date = new Date();
+        var week = req.body.week;
+        var j, k;
         var rdate = req.body.date;
         var altable;
         var tab;
-        var result=[];
+        var result = [];
         // use mongoose to search for courses in the database
         // TODO perhaps modify this (include end_datetime) if we have courses spanning over multiple days
-        Course.find({ 
-        }, function (err, courses) {
+        Course.find({}, function (err, courses) {
             // if there is an error retrieving, send the error.
             // nothing after res.send(err) will execute
             if (err)
                 res.send(err);
-            for(j=0;j<courses.length;j++){
-                    altable=courses[j].dates;
-                    for(k=0;k<altable.length;k++){
+            for (j = 0; j < courses.length; j++) {
+                altable = courses[j].dates;
+                for (k = 0; k < altable.length; k++) {
 
- tab = ""+altable[k];
-                        var n = tab.indexOf(""+rdate);
-              if( tab.indexOf(""+week[0])!=-1 || tab.indexOf(""+week[1])!=-1  ||   tab.indexOf(""+week[2])!=-1  ||  tab.indexOf(""+week[3])!=-1    || tab.indexOf(""+week[4])!=-1     ||  tab.indexOf(""+week[5])!=-1    || tab.indexOf(""+week[6])!=-1    ||  tab.indexOf(""+week[7])!=-1) {
- result.push(courses[j]);
-                break;
-              }
-
+                    tab = "" + altable[k];
+                    var n = tab.indexOf("" + rdate);
+                    if (tab.indexOf("" + week[0]) != -1 || tab.indexOf("" + week[1]) != -1 || tab.indexOf("" + week[2]) != -1 || tab.indexOf("" + week[3]) != -1 || tab.indexOf("" + week[4]) != -1 || tab.indexOf("" + week[5]) != -1 || tab.indexOf("" + week[6]) != -1 || tab.indexOf("" + week[7]) != -1) {
+                        result.push(courses[j]);
+                        break;
                     }
-                                               
+
+                }
+
             }
 
 
@@ -215,14 +202,14 @@ module.exports = function (app) {
 
     app.post('/send', function (req, res) {
         var output =
-        "<p>A new contact request from UniSport</p>" +
-        "<h3>Contact Details</h3>" +
-        "<ul>" +
+            "<p>A new contact request from UniSport</p>" +
+            "<h3>Contact Details</h3>" +
+            "<ul>" +
             "<li> Name: " + req.body.name.$viewValue + "</li>" +
             "<li> Email: " + req.body.email.$viewValue + "</li>" +
-        "</ul>" +
-        "<h3>Message</h3>" +
-        "<p>" + req.body.message.$viewValue + "</p>"
+            "</ul>" +
+            "<h3>Message</h3>" +
+            "<p>" + req.body.message.$viewValue + "</p>"
         ;
 
         // create reusable transporter object using the default SMTP transport
@@ -234,7 +221,7 @@ module.exports = function (app) {
                 user: 'unisport.benefr@gmail.com',
                 pass: 'mouadjoelvictor321'
             },
-            tls:{
+            tls: {
                 rejectUnauthorized: false
             }
         });
@@ -250,18 +237,18 @@ module.exports = function (app) {
         };
 
         // send mail with defined transport object
-        transporter.sendMail(mailOptions, function(error, info) {
-            if(error){
+        transporter.sendMail(mailOptions, function (error, info) {
+            if (error) {
                 res.send(error);
             }
-            else{
+            else {
                 res.send('Message sent: ' + info.response);
 
             }
         });
 
     });
-    
+
 
     // route to handle delete goes here (app.delete)
 
