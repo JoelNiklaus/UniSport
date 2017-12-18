@@ -52,11 +52,13 @@ angular.module('CourseCtrl', []).controller('CourseController', function ($scope
     }
 
     function getCoursesToday() {
-        var r = [];
+      var r = [];
 
         var req = new XMLHttpRequest();
         var date = new Date();
-        var e = date.getDate() + "." + date.getMonth() + "." + date.getFullYear();
+        var month= date.getMonth()+1;
+
+        var e = date.getDate() + "." +month + "." + date.getFullYear();
 
         // Fetch today's Courses
         req.date = e; // today
@@ -79,11 +81,13 @@ angular.module('CourseCtrl', []).controller('CourseController', function ($scope
     }
 
     function getCoursesWeek() {
-        var r = [];
+       var r = [];
 
         var req = new XMLHttpRequest();
         var date = new Date();
-        var e = date.getDate() + "." + date.getMonth() + "." + date.getFullYear();
+        var month= date.getMonth()+1;
+
+        var e = date.getDate() + "." +month + "." + date.getFullYear();
         for (var j = 0; j < 7; j++) {
 
             r.push((date.getDate() + j) + "." + date.getMonth() + "." + date.getFullYear());
