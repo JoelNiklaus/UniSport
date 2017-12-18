@@ -12,7 +12,6 @@ angular.module('ReservationCtrl', []).controller('ReservationController', functi
 
 
     // TODO perform more client side form validation
-//
     // TODO add captcha once we are deployed on cloud: http://bootstrapaholic.de/tutorials/recaptcha-spam-schutz-fuer-kontaktformular/
     
 $scope.loading = false ; 

@@ -1,21 +1,19 @@
-body { padding-top:30px; }
+body {
+    padding-top: 30px;
+}
 
 .disabled {
-  cursor: not-allowed;
+    cursor: not-allowed;
     opacity: .65;
-        pointer-events: none; 
-
-
+    pointer-events: none;
 }
 
 input.ng-touched.ng-invalid, textarea.ng-touched.ng-invalid {
     border: 1px solid red;
 }
 
-
-
-body { 
-   background: transparent url(../image/image2.jpg) no-repeat;
+body {
+    background: transparent url(../image/image2.jpg) no-repeat;
     height: 100%;
 }
 
@@ -24,23 +22,19 @@ table {
     border-spacing: 0 5px;
     padding: 10px;
 }
+
 div {
-
-	/*margin-bottom :500px;*/
-
-}
-#divouter, #divouter2 { 
-    padding:190px;
-    
-    
-    background-color:#f0f0f5;
-
-
+    /*margin-bottom :500px;*/
 }
 
+#divouter, #divouter2 {
+    padding: 190px;
+
+    background-color: #f0f0f5;
+}
 
 br {
-  content: " ";
-  display: block;
-  margin: 200px;
+    content: " ";
+    display: block;
+    margin: 200px;
 }

@@ -1,5 +1,5 @@
-angular.module('AboutUsCtrl', []).controller('AboutUsController', function($scope) {
+angular.module('AboutUsCtrl', []).controller('AboutUsController', function ($scope) {
 
-	$scope.tagline = 'What we do';	
+    $scope.tagline = 'What we do';
 
 });

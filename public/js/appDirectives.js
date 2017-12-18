@@ -8,7 +8,7 @@ datePicker.directive('jqdatepicker', function () {
             $(element).datepicker({
                 dateFormat: 'dd.mm.yy',
                 onSelect: function (date) {
-                     scope.dateSearch.date=date;
+                    scope.dateSearch.date = date;
                     scope.date = date;
                     scope.$apply();
                 },

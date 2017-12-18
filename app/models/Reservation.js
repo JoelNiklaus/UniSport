@@ -1,7 +1,7 @@
 // grab the mongoose module
 var mongoose = require('mongoose');
 
-// define our nerd model
+// define our Reservation model
 // module.exports allows us to pass this to other files when it is called
 var Schema = mongoose.Schema;
 var reservationSchema = new Schema({

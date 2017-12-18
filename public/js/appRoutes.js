@@ -1,38 +1,38 @@
-angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
+angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', function ($routeProvider, $locationProvider) {
 
-	$routeProvider
+    $routeProvider
 
-		// home page
-		.when('/', {
-			templateUrl: 'views/home.html',
-			controller: 'MainController'
-		})
+    // home page
+        .when('/', {
+            templateUrl: 'views/home.html',
+            controller: 'MainController'
+        })
 
-		.when('/courses', {
-			templateUrl: 'views/course.html',
-			controller: 'CourseController'
-		})
+        .when('/courses', {
+            templateUrl: 'views/course.html',
+            controller: 'CourseController'
+        })
 
-		.when('/aboutus', {
-			templateUrl: 'views/aboutus.html',
-			controller: 'AboutUsController'	
-		})
+        .when('/aboutus', {
+            templateUrl: 'views/aboutus.html',
+            controller: 'AboutUsController'
+        })
 
-		.when('/faq', {
-			templateUrl: 'views/faq.html',
-			controller: 'FaqController'
-		})
+        .when('/faq', {
+            templateUrl: 'views/faq.html',
+            controller: 'FaqController'
+        })
 
-		.when('/contact', {
-			templateUrl: 'views/contact.html',
-			controller: 'ContactController'
-		})
+        .when('/contact', {
+            templateUrl: 'views/contact.html',
+            controller: 'ContactController'
+        })
 
-		.when('/reservation/:course_id', {
-			templateUrl: 'views/reservation.html',
-			controller: 'ReservationController'
-		});
+        .when('/reservation/:course_id', {
+            templateUrl: 'views/reservation.html',
+            controller: 'ReservationController'
+        });
 
-	$locationProvider.html5Mode(true);
+    $locationProvider.html5Mode(true);
 
 }]);
