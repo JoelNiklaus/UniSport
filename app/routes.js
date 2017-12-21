@@ -200,7 +200,7 @@ module.exports = function (app) {
         });
     });
 
-    app.post('/send', function (req, res) {
+    app.post('/api/sendForm', function (req, res) {
         var output =
             "<p>A new contact request from UniSport</p>" +
             "<h3>Contact Details</h3>" +

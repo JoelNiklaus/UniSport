@@ -9,7 +9,7 @@ angular.module('ContactCtrl', []).controller('ContactController', function ($sco
         if (contactForm.$valid) {
             var newFormData = angular.copy(contactForm);
 
-            $http.post('/send', newFormData).then(function (response) {
+            $http.post('/api/sendForm', newFormData).then(function (response) {
 
                 $scope.danger = null;
                 $scope.success = "Your message was sent successfully.";
