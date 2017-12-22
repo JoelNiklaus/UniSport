@@ -1,8 +1,7 @@
 <div ng-controller="ReservationController" data-ng-init="init()">
     <div class="jumbotron text-center">
         <h1>Reservation</h1>
-        <p>Make a reservation for the {{course.course_name}} course from {{course.start_datetime}} to
-            {{course.end_datetime}} at {{course.address.place}} at {{course.address.institution}}.</p>
+        <p>Make a reservation for the {{course.sport}} course at {{course.times}} at {{course.place}}</p>
 
         <form class="form-horizontal" ng-show="!success" class="ng-hide" name="formData">
             <div class="form-group">
