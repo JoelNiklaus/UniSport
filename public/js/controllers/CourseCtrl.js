@@ -1,12 +1,5 @@
 angular.module('CourseCtrl', []).controller('CourseController', function ($scope, $http, NgTableParams) {
 
-    // TODO refactor code: introduce common submethods
-
-    // TODO search by day of the week. Have to calculate day of the week from date.
-
-    // TODO search by date
-    // TODO search by address
-
     $scope.tagline = 'Here you can search all the listed courses. Just start typing, and it will automatigally search for you.';
     $scope.n;
     $scope.isClicked = true;
@@ -52,13 +45,13 @@ angular.module('CourseCtrl', []).controller('CourseController', function ($scope
     }
 
     function getCoursesToday() {
-      var r = [];
+        var r = [];
 
         var req = new XMLHttpRequest();
         var date = new Date();
-        var month= date.getMonth()+1;
+        var month = date.getMonth() + 1;
 
-        var e = date.getDate() + "." +month + "." + date.getFullYear();
+        var e = date.getDate() + "." + month + "." + date.getFullYear();
 
         // Fetch today's Courses
         req.date = e; // today
@@ -81,13 +74,13 @@ angular.module('CourseCtrl', []).controller('CourseController', function ($scope
     }
 
     function getCoursesWeek() {
-       var r = [];
+        var r = [];
 
         var req = new XMLHttpRequest();
         var date = new Date();
-        var month= date.getMonth()+1;
+        var month = date.getMonth() + 1;
 
-        var e = date.getDate() + "." +month + "." + date.getFullYear();
+        var e = date.getDate() + "." + month + "." + date.getFullYear();
         for (var j = 0; j < 7; j++) {
 
             r.push((date.getDate() + j) + "." + date.getMonth() + "." + date.getFullYear());

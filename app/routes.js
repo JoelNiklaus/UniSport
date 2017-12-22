@@ -65,8 +65,6 @@ module.exports = function (app) {
                                             if (err) console.log(err);
 
                                         });
-
-
                                     }
                                 );
 
@@ -79,8 +77,6 @@ module.exports = function (app) {
                         }
                     }
                 );
-
-
             }
         });
 
@@ -139,7 +135,6 @@ module.exports = function (app) {
         var tab;
         var result = [];
         // use mongoose to search for courses in the database
-        // TODO perhaps modify this (include end_datetime) if we have courses spanning over multiple days
         Course.find({}, function (err, courses) {
             // if there is an error retrieving, send the error.
             // nothing after res.send(err) will execute
@@ -159,8 +154,6 @@ module.exports = function (app) {
                 }
 
             }
-
-
             res.json(result); // return all courses in JSON format
         });
     });
@@ -174,7 +167,6 @@ module.exports = function (app) {
         var tab;
         var result = [];
         // use mongoose to search for courses in the database
-        // TODO perhaps modify this (include end_datetime) if we have courses spanning over multiple days
         Course.find({}, function (err, courses) {
             // if there is an error retrieving, send the error.
             // nothing after res.send(err) will execute
@@ -194,7 +186,6 @@ module.exports = function (app) {
                 }
 
             }
-
 
             res.json(result); // return all courses in JSON format
         });

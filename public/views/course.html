@@ -84,7 +84,6 @@
             <h2>Date Search</h2>
 
             <form>
-                <!-- TODO Mouad: Ca ne foncionne pas. Tu sais pourquoi? le model n'est pas trouvé-->
                 <div class="input-group input-group-lg">
 
                     <input type="text" class="form-control" ng-model="dateSearch.date"
@@ -206,9 +205,7 @@
                                 <th>Maximum Participants</th>
                                 <th>Place</th>
                                 <th>number of participant</th>
-
                                 <th>Reservation</th>
-
                             </tr>
                             <tr ng-repeat-start="course in $data ">
                                 <td><a href="#" ng-click="isClicked = !isClicked">{{course.sport}}</a></td>
@@ -220,7 +217,6 @@
                                 <td><a href="reservation/{{course._id}}" ng-click="disabled(course)"
                                        ng-class="{disabled: IsReached(course)}">Reserve place</a></td>
                             </tr>
-
 
                             <tr collapse="isClicked" ng-repeat-end="">
                                 <td colspan="7">
